@@ -4,7 +4,7 @@ L'obiettivo finale dell'attività è lavorare su di un progetto ripercorrendo le
 
 Lo strumento per raggiungere tale obiettivo sarà la realizzazione di un MVP di un progetto.
 
-Lo sviluppo si completerà **Venerdi 20 Settembre**, quando tutti i team termineranno il loro lavoro.
+Lo sviluppo si completerà **Venerdi 25 Ottobre**, quando tutti i team termineranno il loro lavoro.
 
 ## Calendario Attività:
 
