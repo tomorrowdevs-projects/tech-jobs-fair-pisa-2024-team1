@@ -10,7 +10,7 @@ Lo sviluppo si completerà **Venerdi 25 Ottobre**, quando tutti i team terminera
 
 ### Venerdi 18 Ottobre 2024
 
-#### Ore 11.00: Meeting di ritrovo su [link zoom] e saluti
+#### Ore 10.30: Meeting di ritrovo su [link zoom] e saluti
 
 #### Fase 1: brainstorming progetto
 In call con tutti i team, verranno raccolti i requisiti attraverso una sessione di domande e risposte.
