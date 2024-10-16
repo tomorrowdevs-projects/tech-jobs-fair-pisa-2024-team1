@@ -49,7 +49,7 @@ L'obiettivo del progetto è sviluppare un'applicazione web e mobile che permetta
 
 - Visualizzazione della mappa di alberi e aree verdi della città.
 - Icone informative per ogni albero o area con dettagli come specie e stato.
-- Invio di segnalazioni per problemi (ramo rotto, pianta malata, ecc.).
+- Invio di segnalazioni per problemi (ramo rotto, pianta malata, ecc.) (non è necessaria alcuna autenticazione)
 - Categorie di problema, descrizione, posizione geolocalizzata e foto allegata (opzionale).
 - Calcolo delle rotte per chi dovrà fare manutenzione alle piante segnalate
 
