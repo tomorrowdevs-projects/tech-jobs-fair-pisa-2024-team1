@@ -39,19 +39,28 @@ Ogni team presenterà il proprio progetto fisicamente alla Tech Jobs Fair di Pis
 
 # Requisito tecnico
 
-## HABIT TRACKER
+## TREES MAP
 
-### Scopo del Progetto:
+### Scopo del Progetto: Applicazione per la mappatura del patrimonio verde
+
+L'obiettivo del progetto è sviluppare un'applicazione web e mobile che permetta agli utenti di visualizzare una mappa interattiva delle aree verdi e degli alberi di una città e di inviare segnalazioni relative a problemi come rami rotti, piante malate o altre condizioni pericolose. L'applicazione dovrà offrire una gestione intuitiva delle segnalazioni, garantendo una facile consultazione per i tecnici addetti alla manutenzione del verde urbano.
+
+### Funzionalità
+
+- Visualizzazione della mappa di alberi e aree verdi della città.
+- Icone informative per ogni albero o area con dettagli come specie e stato.
+- Invio di segnalazioni per problemi (ramo rotto, pianta malata, ecc.).
+- Categorie di problema, descrizione, posizione geolocalizzata e foto allegata (opzionale).
+- Calcolo delle rotte per chi dovrà fare manutenzione alle piante segnalate
 
 
 ### Milestones
 
 - [ ] Analizzare il progetto: Documentare attraverso un'analisi i requisiti del progetto e le varie parti di cui è composto, definire un'architettura di base del progetto (tecnologie / linguaggi)
 - [ ] Prototipare l'applicazione attraverso tool come Figma o Adobe XD
-- [ ] Garantire l'accesso autenticato, inserire un'abitudine, permettere all'utente di flaggarla come completata
-- [ ] Inserimento anche di abitudini ricorrenti (frequenza variabile, giornaliera, settimanale, o specifici giorni della settimana o del mese)
-- [ ] Notifiche del browser che avvisano la ricorrenza
-- [ ] Report sull'andamento, possibilità di coinvolgere altri utenti nelle abitudini, inviando loro notifiche via mail
+- [ ] Visualizzare la mappa con gli elementi del dataset
+- [ ] Permettere l'inserimento di segnalazioni
+- [ ] Integrare il calcolo delle rotte
 
 
 ### Alcuni consigli utili
