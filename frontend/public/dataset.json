@@ -1,0 +1,452 @@
+[
+    {
+        "ID": 1,
+        "Tipo": "Albero",
+        "Nome": "Quercia",
+        "Latitudine": 45.4654,
+        "Longitudine": 9.1866,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-12"
+    },
+    {
+        "ID": 2,
+        "Tipo": "Albero",
+        "Nome": "Pino",
+        "Latitudine": 45.4665,
+        "Longitudine": 9.1871,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-05"
+    },
+    {
+        "ID": 3,
+        "Tipo": "Parco",
+        "Nome": "Parco Centrale",
+        "Latitudine": 45.4648,
+        "Longitudine": 9.185,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 4,
+        "Tipo": "Albero",
+        "Nome": "Cedro",
+        "Latitudine": 45.4677,
+        "Longitudine": 9.1888,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "2023-09-20"
+    },
+    {
+        "ID": 5,
+        "Tipo": "Giardino",
+        "Nome": "Giardino Fiorito",
+        "Latitudine": 45.4639,
+        "Longitudine": 9.1845,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 6,
+        "Tipo": "Albero",
+        "Nome": "Olmo",
+        "Latitudine": 45.4685,
+        "Longitudine": 9.1839,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-10-01"
+    },
+    {
+        "ID": 7,
+        "Tipo": "Parco",
+        "Nome": "Parco Est",
+        "Latitudine": 45.4621,
+        "Longitudine": 9.1822,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 8,
+        "Tipo": "Albero",
+        "Nome": "Cipresso",
+        "Latitudine": 45.4662,
+        "Longitudine": 9.1815,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-10-10"
+    },
+    {
+        "ID": 9,
+        "Tipo": "Giardino",
+        "Nome": "Giardino dei Sensi",
+        "Latitudine": 45.4615,
+        "Longitudine": 9.1809,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "2023-10-11"
+    },
+    {
+        "ID": 10,
+        "Tipo": "Albero",
+        "Nome": "Platano",
+        "Latitudine": 45.4699,
+        "Longitudine": 9.1799,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 11,
+        "Tipo": "Albero",
+        "Nome": "Acero",
+        "Latitudine": 45.470,
+        "Longitudine": 9.170,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 12,
+        "Tipo": "Parco",
+        "Nome": "Parco Sud",
+        "Latitudine": 45.471,
+        "Longitudine": 9.171,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 13,
+        "Tipo": "Giardino",
+        "Nome": "Giardino delle Rose",
+        "Latitudine": 45.472,
+        "Longitudine": 9.172,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 14,
+        "Tipo": "Albero",
+        "Nome": "Salice",
+        "Latitudine": 45.473,
+        "Longitudine": 9.173,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 15,
+        "Tipo": "Parco",
+        "Nome": "Parco Ovest",
+        "Latitudine": 45.474,
+        "Longitudine": 9.174,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 16,
+        "Tipo": "Albero",
+        "Nome": "Faggio",
+        "Latitudine": 45.475,
+        "Longitudine": 9.175,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 17,
+        "Tipo": "Parco",
+        "Nome": "Parco delle Rimembranze",
+        "Latitudine": 45.476,
+        "Longitudine": 9.176,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 18,
+        "Tipo": "Giardino",
+        "Nome": "Giardino della Luce",
+        "Latitudine": 45.477,
+        "Longitudine": 9.177,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 19,
+        "Tipo": "Albero",
+        "Nome": "Tiglio",
+        "Latitudine": 45.478,
+        "Longitudine": 9.178,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 20,
+        "Tipo": "Parco",
+        "Nome": "Parco Nord",
+        "Latitudine": 45.479,
+        "Longitudine": 9.179,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 21,
+        "Tipo": "Albero",
+        "Nome": "Ciliegio",
+        "Latitudine": 45.480,
+        "Longitudine": 9.180,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 22,
+        "Tipo": "Parco",
+        "Nome": "Parco del Sole",
+        "Latitudine": 45.481,
+        "Longitudine": 9.181,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 23,
+        "Tipo": "Giardino",
+        "Nome": "Giardino delle Stelle",
+        "Latitudine": 45.482,
+        "Longitudine": 9.182,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 24,
+        "Tipo": "Albero",
+        "Nome": "Olivo",
+        "Latitudine": 45.483,
+        "Longitudine": 9.183,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 25,
+        "Tipo": "Parco",
+        "Nome": "Parco Aurora",
+        "Latitudine": 45.484,
+        "Longitudine": 9.184,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 26,
+        "Tipo": "Albero",
+        "Nome": "Noce",
+        "Latitudine": 45.485,
+        "Longitudine": 9.185,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 27,
+        "Tipo": "Parco",
+        "Nome": "Parco degli Angeli",
+        "Latitudine": 45.486,
+        "Longitudine": 9.186,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 28,
+        "Tipo": "Giardino",
+        "Nome": "Giardino della Luna",
+        "Latitudine": 45.487,
+        "Longitudine": 9.187,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 29,
+        "Tipo": "Albero",
+        "Nome": "Castagno",
+        "Latitudine": 45.488,
+        "Longitudine": 9.188,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 30,
+        "Tipo": "Parco",
+        "Nome": "Parco dei Ciliegi",
+        "Latitudine": 45.489,
+        "Longitudine": 9.189,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 31,
+        "Tipo": "Albero",
+        "Nome": "Frassino",
+        "Latitudine": 45.490,
+        "Longitudine": 9.190,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 32,
+        "Tipo": "Parco",
+        "Nome": "Parco delle Querce",
+        "Latitudine": 45.491,
+        "Longitudine": 9.191,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 33,
+        "Tipo": "Giardino",
+        "Nome": "Giardino di Venere",
+        "Latitudine": 45.492,
+        "Longitudine": 9.192,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 34,
+        "Tipo": "Albero",
+        "Nome": "Pioppo",
+        "Latitudine": 45.493,
+        "Longitudine": 9.193,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 35,
+        "Tipo": "Parco",
+        "Nome": "Parco del Cedro",
+        "Latitudine": 45.494,
+        "Longitudine": 9.194,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 36,
+        "Tipo": "Albero",
+        "Nome": "Leccio",
+        "Latitudine": 45.495,
+        "Longitudine": 9.195,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 37,
+        "Tipo": "Parco",
+        "Nome": "Parco del Tiglio",
+        "Latitudine": 45.496,
+        "Longitudine": 9.196,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 38,
+        "Tipo": "Giardino",
+        "Nome": "Giardino della Pace",
+        "Latitudine": 45.497,
+        "Longitudine": 9.197,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 39,
+        "Tipo": "Albero",
+        "Nome": "Betulla",
+        "Latitudine": 45.498,
+        "Longitudine": 9.198,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 40,
+        "Tipo": "Parco",
+        "Nome": "Parco della Quiete",
+        "Latitudine": 45.499,
+        "Longitudine": 9.199,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 41,
+        "Tipo": "Albero",
+        "Nome": "Acero Rosso",
+        "Latitudine": 45.500,
+        "Longitudine": 9.200,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 42,
+        "Tipo": "Parco",
+        "Nome": "Parco delle Camelie",
+        "Latitudine": 45.501,
+        "Longitudine": 9.201,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 43,
+        "Tipo": "Giardino",
+        "Nome": "Giardino delle Ninfee",
+        "Latitudine": 45.502,
+        "Longitudine": 9.202,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 44,
+        "Tipo": "Albero",
+        "Nome": "Gelso",
+        "Latitudine": 45.503,
+        "Longitudine": 9.203,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 45,
+        "Tipo": "Parco",
+        "Nome": "Parco delle Ginestre",
+        "Latitudine": 45.504,
+        "Longitudine": 9.204,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 46,
+        "Tipo": "Albero",
+        "Nome": "Magnolia",
+        "Latitudine": 45.505,
+        "Longitudine": 9.205,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-08-15"
+    },
+    {
+        "ID": 47,
+        "Tipo": "Parco",
+        "Nome": "Parco della Rovere",
+        "Latitudine": 45.506,
+        "Longitudine": 9.206,
+        "Stato": "Malato",
+        "Ultima Segnalazione": "2023-09-01"
+    },
+    {
+        "ID": 48,
+        "Tipo": "Giardino",
+        "Nome": "Giardino della Felicità",
+        "Latitudine": 45.507,
+        "Longitudine": 9.207,
+        "Stato": "Ramo Rotto",
+        "Ultima Segnalazione": "N/A"
+    },
+    {
+        "ID": 49,
+        "Tipo": "Albero",
+        "Nome": "Abete",
+        "Latitudine": 45.508,
+        "Longitudine": 9.208,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "2023-09-10"
+    },
+    {
+        "ID": 50,
+        "Tipo": "Parco",
+        "Nome": "Parco Nord",
+        "Latitudine": 45.509,
+        "Longitudine": 9.209,
+        "Stato": "Buono",
+        "Ultima Segnalazione": "N/A"
+    }
+]
