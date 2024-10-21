@@ -1,13 +1,19 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import itemsData from "../dataset.json";
-
 import { useUserLocation } from "../hooks/useUserLocation";
-import { useEffect, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
+import { useEffect, useMemo, useState } from "react";
 import { Logo } from "../components/Logo";
 import { treeMarker, userMarker } from "../components/markers";
+import SearchInput from "../components/Search";
+import { MdOutlineMyLocation } from "react-icons/md";
+import Modal from "../components/Modal";
 
+export interface Place {
+    display_name?: string;
+    lat?: number;
+    lon?: number;
+}
 
 const FlyToUserLocation = ({ position }: { position: [number, number] | null }) => {
     const map = useMap();
@@ -23,17 +29,30 @@ const FlyToUserLocation = ({ position }: { position: [number, number] | null }) 
 
 const MapPage = () => {
     const { position } = useUserLocation();
-    const [location, setLocation] = useState<string>("")
+    const [location, setLocation] = useState<Place | null>(null)
+    const [isOpen, setIsOpen] = useState(false);
+
+    const currentLocation: [number, number] = useMemo(() => {
+        if (location?.lat && location?.lon) {
+            return [Number(location.lat), Number(location.lon)]
+        }
+
+        if (position) {
+            return position
+        }
+
+        return [51.505, -0.09]
+    }, [location, position])
 
     return (
         <div className="h-screen relative flex items-center">
-            <MapContainer center={position ?? [51.505, -0.09]} zoom={13} zoomControl={false} className="w-full h-screen">
+            <MapContainer center={currentLocation} zoom={13} zoomControl={false} className="w-full h-screen">
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
-                <FlyToUserLocation position={position} />
+                <FlyToUserLocation position={currentLocation} />
                 {itemsData.map((item) => {
                     const isBadCondition = item.Stato !== "Buono";
                     return (
@@ -45,25 +64,21 @@ const MapPage = () => {
                     );
                 })}
             </MapContainer>
-            <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[999]">
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        placeholder="Search location ..."
-                        value={location}
-                        onChange={(e) => setLocation(e.currentTarget.value)}
-                        className="w-full rounded-full p-4 box-shadow placeholder:italic font-medium outline-none"
-                    />
-                    <button className="absolute top-[11px] right-5">
-                        <IoIosSearch color="#878585" size={35} />
-                    </button>
-                </div>
+            <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[400]">
+                <SearchInput setLocation={setLocation} />
             </div>
-            <div className="w-full fixed bottom-0 left-0 z-[999] flex justify-center items-center">
-                <button>
+            <div className="w-full fixed bottom-0 left-0 z-[400] flex justify-center items-center">
+                <button onClick={() => setIsOpen(true)}>
                     <Logo />
                 </button>
             </div>
+            <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-lg z-[400] flex justify-center items-center">
+                <button onClick={() => setLocation(null)}>
+                    <MdOutlineMyLocation size={30} />
+                </button>
+            </div>
+
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen} />
         </div>
     );
 };
