@@ -26,8 +26,8 @@ const MapPage = () => {
     const [location, setLocation] = useState<string>("")
 
     return (
-        <div className="h-screen relative">
-            <MapContainer center={position ?? [51.505, -0.09]} zoom={13} id="map" zoomControl={false} className="h-full">
+        <div className="h-screen relative flex items-center">
+            <MapContainer center={position ?? [51.505, -0.09]} zoom={13} zoomControl={false} className="w-full h-screen">
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
