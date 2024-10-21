@@ -14,6 +14,11 @@ export interface Place {
     lat?: number;
     lon?: number;
 }
+export interface Place {
+    display_name?: string;
+    lat?: number;
+    lon?: number;
+}
 
 const FlyToUserLocation = ({ position }: { position: [number, number] | null }) => {
     const map = useMap();
@@ -52,6 +57,7 @@ const MapPage = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
+                <FlyToUserLocation position={currentLocation} />
                 <FlyToUserLocation position={currentLocation} />
                 {itemsData.map((item) => {
                     const isBadCondition = item.Stato !== "Buono";
