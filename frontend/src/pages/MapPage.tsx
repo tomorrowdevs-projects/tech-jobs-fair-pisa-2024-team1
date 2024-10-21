@@ -7,7 +7,13 @@ import { Logo } from "../components/Logo";
 import { treeMarker, userMarker } from "../components/markers";
 import SearchInput from "../components/Search";
 import { MdOutlineMyLocation } from "react-icons/md";
+import Modal from "../components/Modal";
 
+export interface Place {
+    display_name?: string;
+    lat?: number;
+    lon?: number;
+}
 export interface Place {
     display_name?: string;
     lat?: number;
@@ -29,6 +35,7 @@ const FlyToUserLocation = ({ position }: { position: [number, number] | null }) 
 const MapPage = () => {
     const { position } = useUserLocation();
     const [location, setLocation] = useState<Place | null>(null)
+    const [isOpen, setIsOpen] = useState(false);
 
     const currentLocation: [number, number] = useMemo(() => {
         if (location?.lat && location?.lon) {
@@ -51,6 +58,7 @@ const MapPage = () => {
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
                 <FlyToUserLocation position={currentLocation} />
+                <FlyToUserLocation position={currentLocation} />
                 {itemsData.map((item) => {
                     const isBadCondition = item.Stato !== "Buono";
                     return (
@@ -62,19 +70,21 @@ const MapPage = () => {
                     );
                 })}
             </MapContainer>
-            <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[999]">
+            <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[400]">
                 <SearchInput setLocation={setLocation} />
             </div>
-            <div className="w-full fixed bottom-0 left-0 z-[999] flex justify-center items-center">
-                <button>
+            <div className="w-full fixed bottom-0 left-0 z-[400] flex justify-center items-center">
+                <button onClick={() => setIsOpen(true)}>
                     <Logo />
                 </button>
             </div>
-            <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-lg z-[999] flex justify-center items-center">
+            <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-lg z-[400] flex justify-center items-center">
                 <button onClick={() => setLocation(null)}>
                     <MdOutlineMyLocation size={30} />
                 </button>
             </div>
+
+            <Modal setIsOpen={setIsOpen} isOpen={isOpen} />
         </div>
     );
 };
