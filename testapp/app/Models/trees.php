@@ -16,5 +16,6 @@ class trees extends Model
         'longitudine',
         'stato',
         'ultima_segnalazione',
+        'immagine'
     ];
 }

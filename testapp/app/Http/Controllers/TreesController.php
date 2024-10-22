@@ -39,6 +39,7 @@ class TreesController extends Controller
             'longitudine' => $request->longitudine,
             'stato' => $request->stato,
             'ultima_segnalazione' => $request->ultima_segnalazione,
+            'immagine' => $request->immagine,
         ]);
 
         return response()->json($tree, 201);
@@ -85,6 +86,7 @@ class TreesController extends Controller
                 'longitudine' => $request->longitudine,
                 'stato' => $request->stato,
                 'ultima_segnalazione' => $request->ultima_segnalazione,
+                'immagine' => $request->immagine,
             ]);
             return response()->json($tree, 200);
         } else {
