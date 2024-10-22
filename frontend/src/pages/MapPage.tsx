@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import itemsData from "../dataset.json";
 import { useUserLocation } from "../hooks/useUserLocation";
 import { useEffect, useMemo, useState } from "react";
 import { Logo } from "../components/Logo";
@@ -8,6 +7,7 @@ import { treeMarker, userMarker } from "../components/markers";
 import SearchInput from "../components/Search";
 import { MdOutlineMyLocation } from "react-icons/md";
 import Modal from "../components/Modal";
+import { useReports } from "../hooks/useReports";
 
 export interface Place {
     display_name?: string;
@@ -34,6 +34,7 @@ const FlyToUserLocation = ({ position }: { position: [number, number] | null }) 
 
 const MapPage = () => {
     const { position } = useUserLocation();
+    const { allReports, findReports } = useReports()
     const [location, setLocation] = useState<Place | null>(null)
     const [isOpen, setIsOpen] = useState(false);
 
@@ -49,6 +50,10 @@ const MapPage = () => {
         return [51.505, -0.09]
     }, [location, position])
 
+    useEffect(() => {
+        findReports()
+    }, [])
+
     return (
         <div className="h-screen relative flex items-center">
             <MapContainer center={currentLocation} zoom={13} zoomControl={false} className="w-full h-screen">
@@ -58,12 +63,12 @@ const MapPage = () => {
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
                 <FlyToUserLocation position={currentLocation} />
-                {itemsData.map((item) => {
-                    const isBadCondition = item.Stato !== "Buono";
+                {allReports.map((report) => {
+                    const isBadCondition = report.stato !== "Buono";
                     return (
                         <Marker
-                            key={item.ID}
-                            position={[item.Latitudine, item.Longitudine]}
+                            key={report.id}
+                            position={[Number(report.latitudine), Number(report.longitudine)]}
                             icon={treeMarker(isBadCondition)}
                         />
                     );
@@ -77,8 +82,8 @@ const MapPage = () => {
                     <Logo />
                 </button>
             </div>
-            <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-lg z-[400] flex justify-center items-center">
-                <button onClick={() => setLocation(null)}>
+            <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
+                <button onClick={() => setLocation(position ? { lat: position[0], lon: position[1] } : null)}>
                     <MdOutlineMyLocation size={30} />
                 </button>
             </div>
