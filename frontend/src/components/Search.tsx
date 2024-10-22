@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { IoIosSearch } from 'react-icons/io';
 import { Place } from '../pages/MapPage';
+import { IoCloseOutline } from 'react-icons/io5';
 
 interface SearchInputProps {
     setLocation: (value: Place) => void
@@ -9,8 +10,10 @@ interface SearchInputProps {
 
 const SearchInput = ({ setLocation }: SearchInputProps) => {
     const [query, setQuery] = useState<string>('');
+    const [currentPlace, setCurrentPlace] = useState<Place | null>(null)
     const [results, setResults] = useState<Place[]>([]);
     const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+    const [isFocused, setIsFocused] = useState<boolean>(false)
 
     const searchPlaces = async (searchQuery: string) => {
         try {
@@ -41,6 +44,7 @@ const SearchInput = ({ setLocation }: SearchInputProps) => {
 
     const handleSelect = (place: Place) => {
         setQuery(place.display_name as string);
+        setCurrentPlace(place)
         setLocation(place)
         setShowSuggestions(false);
     };
@@ -60,10 +64,20 @@ const SearchInput = ({ setLocation }: SearchInputProps) => {
                 value={query}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                onFocus={() => setIsFocused(prev => !prev)}
             />
-            <button className="absolute top-[11px] right-5">
-                <IoIosSearch color="#878585" size={35} />
-            </button>
+            {(isFocused && !!query) ?
+                <button className="absolute top-[11px] right-5" onClick={() => setQuery("")}>
+                    <IoCloseOutline color="#878585" size={35} />
+                </button> :
+                <button className="absolute top-[11px] right-5" onClick={() => {
+                    if (currentPlace) {
+                        setLocation(currentPlace)
+                    }
+                }}>
+                    <IoIosSearch color="#878585" size={35} />
+                </button>
+            }
             {showSuggestions && results.length > 0 && (
                 <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1">
                     {results.map((place, index) => (
