@@ -1,7 +1,7 @@
 import { atom } from "nanostores"
 import { Report } from "../types"
 import { useStore } from "@nanostores/react"
-import { getReports } from "../api"
+import { createReport, deleteReport, getReports, updateReport } from "../api"
 import { useState } from "react"
 
 export const $allReports = atom<Report[]>([])
@@ -24,9 +24,40 @@ export const useReports = () => {
         }
     }
 
+    const addReport = async (report: Report) => {
+        try {
+            setLoading(true)
+            const { data } = await createReport(report);
+            setLoading(false)
+            return data
+        } catch (err) {
+            setLoading(false)
+            throw err
+        }
+    }
+
+    const editReport = async (report: Report) => {
+        try {
+            setLoading(true)
+            const { data } = await updateReport(report);
+            setLoading(false)
+            return data
+        } catch (err) {
+            setLoading(false)
+            throw err
+        }
+    }
+
+    const removeReport = async (reportId: number) => {
+        await deleteReport(reportId);
+    }
+
     return {
         loading,
         allReports,
-        findReports
+        findReports,
+        addReport,
+        editReport,
+        removeReport
     }
 }

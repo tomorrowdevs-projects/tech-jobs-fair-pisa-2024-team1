@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ReportRequest } from "../types"
+import { Report } from "../types"
 
 const baseUrl = import.meta.env.VITE_BASE_URL
 
@@ -11,11 +11,11 @@ export const getReport = async (id: string) => {
     return await axios.get(baseUrl + id);
 };
 
-export const createReport = async (createRequest: ReportRequest) => {
+export const createReport = async (createRequest: Report) => {
     return await axios.post(baseUrl, createRequest);
 };
 
-export const updateReport = async (updateRequest: ReportRequest) => {
+export const updateReport = async (updateRequest: Report) => {
     return await axios.put(baseUrl + updateRequest?.id?.toString(), updateRequest);
 };
 
