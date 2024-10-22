@@ -75,7 +75,7 @@ const MapPage = () => {
                 })}
             </MapContainer>
             <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[400]">
-                <SearchInput setLocation={setLocation} />
+                <SearchInput setLocation={setLocation} includeIcon className="w-full rounded-full p-4 box-shadow placeholder:italic font-medium outline-none" />
             </div>
             <div className="w-full fixed bottom-0 left-0 z-[400] flex justify-center items-center">
                 <button onClick={() => setIsOpen(true)}>

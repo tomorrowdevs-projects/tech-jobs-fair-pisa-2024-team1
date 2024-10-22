@@ -6,9 +6,11 @@ import { IoCloseOutline } from 'react-icons/io5';
 
 interface SearchInputProps {
     setLocation: (value: Place) => void
+    className: string
+    includeIcon?: boolean
 }
 
-const SearchInput = ({ setLocation }: SearchInputProps) => {
+const SearchInput = ({ setLocation, className, includeIcon = false }: SearchInputProps) => {
     const [query, setQuery] = useState<string>('');
     const [currentPlace, setCurrentPlace] = useState<Place | null>(null)
     const [results, setResults] = useState<Place[]>([]);
@@ -59,24 +61,26 @@ const SearchInput = ({ setLocation }: SearchInputProps) => {
         <div className="relative w-full max-w-md mx-auto">
             <input
                 type="text"
-                className="w-full rounded-full p-4 box-shadow placeholder:italic font-medium outline-none"
+                className={className}
                 placeholder="Search location..."
                 value={query}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 onFocus={() => setIsFocused(prev => !prev)}
             />
-            {(isFocused && !!query) ?
-                <button className="absolute top-[11px] right-5" onClick={() => setQuery("")}>
-                    <IoCloseOutline color="#878585" size={35} />
-                </button> :
-                <button className="absolute top-[11px] right-5" onClick={() => {
-                    if (currentPlace) {
-                        setLocation(currentPlace)
-                    }
-                }}>
-                    <IoIosSearch color="#878585" size={35} />
-                </button>
+            {includeIcon ?
+                (isFocused && !!query) ?
+                    <button className="absolute top-[11px] right-5" onClick={() => setQuery("")}>
+                        <IoCloseOutline color="#878585" size={35} />
+                    </button> :
+                    <button className="absolute top-[11px] right-5" onClick={() => {
+                        if (currentPlace) {
+                            setLocation(currentPlace)
+                        }
+                    }}>
+                        <IoIosSearch color="#878585" size={35} />
+                    </button>
+                : null
             }
             {showSuggestions && results.length > 0 && (
                 <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1">
