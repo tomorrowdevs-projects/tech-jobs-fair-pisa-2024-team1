@@ -29,6 +29,7 @@ export const useReports = () => {
             setLoading(true)
             const { data } = await createReport(report);
             setLoading(false)
+            findReports()
             return data
         } catch (err) {
             setLoading(false)
