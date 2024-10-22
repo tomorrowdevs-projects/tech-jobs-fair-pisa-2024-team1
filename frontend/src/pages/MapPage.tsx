@@ -58,7 +58,6 @@ const MapPage = () => {
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
                 <FlyToUserLocation position={currentLocation} />
-                <FlyToUserLocation position={currentLocation} />
                 {itemsData.map((item) => {
                     const isBadCondition = item.Stato !== "Buono";
                     return (
