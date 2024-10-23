@@ -55,7 +55,7 @@ const MapPage = () => {
     }, [])
 
     return (
-        <div className="h-screen relative flex items-center">
+        <div className="h-screen relative flex items-center max-w-md">
             <MapContainer center={currentLocation} zoom={13} zoomControl={false} className="w-full h-screen">
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
