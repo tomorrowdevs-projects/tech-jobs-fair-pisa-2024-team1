@@ -8,12 +8,9 @@ import SearchInput from "../components/Search";
 import { MdOutlineMyLocation } from "react-icons/md";
 import Modal from "../components/Modal";
 import { useReports } from "../hooks/useReports";
+import TreeCard from "../components/TreeCard";
+import { Report } from "../types";
 
-export interface Place {
-    display_name?: string;
-    lat?: number;
-    lon?: number;
-}
 export interface Place {
     display_name?: string;
     lat?: number;
@@ -30,25 +27,30 @@ const FlyToUserLocation = ({ position }: { position: [number, number] | null }) 
     }, [position, map]);
 
     return null;
-}
+};
 
 const MapPage = () => {
     const { position } = useUserLocation();
     const { allReports, findReports } = useReports()
-    const [location, setLocation] = useState<Place | null>(null)
+    const [location, setLocation] = useState<Place | null>(null);
+    const [selectedTree, setSelectedTree] = useState<Report | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
     const currentLocation: [number, number] = useMemo(() => {
         if (location?.lat && location?.lon) {
-            return [Number(location.lat), Number(location.lon)]
+            return [Number(location.lat), Number(location.lon)];
         }
 
         if (position) {
-            return position
+            return position;
         }
 
-        return [51.505, -0.09]
-    }, [location, position])
+        return [51.505, -0.09];
+    }, [location, position]);
+
+    const handleCloseModal = () => {
+        setSelectedTree(null);
+    };
 
     useEffect(() => {
         findReports()
@@ -63,25 +65,31 @@ const MapPage = () => {
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
                 <FlyToUserLocation position={currentLocation} />
-                {allReports.map((report) => {
+                {allReports.map(report => {
                     const isBadCondition = report.stato !== "Buono";
                     return (
                         <Marker
                             key={report.id}
                             position={[Number(report.latitudine), Number(report.longitudine)]}
                             icon={treeMarker(isBadCondition)}
+                            eventHandlers={{
+                                click: () => setSelectedTree(report as Report),
+                            }}
                         />
                     );
                 })}
             </MapContainer>
+
             <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[400]">
                 <SearchInput setLocation={setLocation} includeIcon className="w-full rounded-full p-4 box-shadow placeholder:italic font-medium outline-none" />
             </div>
+
             <div className="w-full fixed bottom-0 left-0 z-[400] flex justify-center items-center">
                 <button onClick={() => setIsOpen(true)}>
                     <Logo />
                 </button>
             </div>
+
             <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
                 <button onClick={() => setLocation(position ? { lat: position[0], lon: position[1] } : null)}>
                     <MdOutlineMyLocation size={30} />
@@ -89,6 +97,13 @@ const MapPage = () => {
             </div>
 
             <Modal setIsOpen={setIsOpen} isOpen={isOpen} />
+
+            {selectedTree && (
+                <TreeCard
+                    selectedTree={selectedTree}
+                    onClose={handleCloseModal}
+                />
+            )}
         </div>
     );
 };
