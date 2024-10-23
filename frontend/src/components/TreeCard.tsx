@@ -1,7 +1,6 @@
-import React from "react";
 import { RiToolsFill } from "react-icons/ri";
 import { IoCloseSharp, IoNavigateCircleOutline } from "react-icons/io5";
-import placeholder from "../../public/placeholder.png";
+import placeholder from "/placeholder.png";
 
 interface TreeCardProps {
   tipo: string;
@@ -11,7 +10,7 @@ interface TreeCardProps {
   onClose: () => void;
 }
 
-const TreeCard: React.FC<TreeCardProps> = ({ tipo, nome, stato, ultimaSegnalazione, onClose }) => {
+const TreeCard = ({ tipo, nome, stato, ultimaSegnalazione, onClose }: TreeCardProps) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-[999] flex justify-center items-center">
       <div className="bg-white px-6 pt-5 pb-9 rounded-lg shadow-2xl w-150 relative flex flex-col items-center">
