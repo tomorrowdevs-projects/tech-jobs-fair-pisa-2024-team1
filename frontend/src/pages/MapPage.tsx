@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import { useUserLocation } from "../hooks/useUserLocation";
 import { useEffect, useMemo, useState } from "react";
 import { Logo } from "../components/Logo";
@@ -10,6 +9,7 @@ import Modal from "../components/Modal";
 import { useReports } from "../hooks/useReports";
 import TreeCard from "../components/TreeCard";
 import { Report } from "../types";
+// import RoutingMachine from "../components/RoutingMachine";
 
 export interface Place {
     display_name?: string;
@@ -35,6 +35,7 @@ const MapPage = () => {
     const [location, setLocation] = useState<Place | null>(null);
     const [selectedTree, setSelectedTree] = useState<Report | null>(null);
     const [isOpen, setIsOpen] = useState(false);
+    // const [isNavigate, setIsNavigate] = useState<boolean>(false)
 
     const currentLocation: [number, number] = useMemo(() => {
         if (location?.lat && location?.lon) {
@@ -57,7 +58,7 @@ const MapPage = () => {
     }, [])
 
     return (
-        <div className="h-screen relative flex items-center">
+        <div className="h-screen relative flex items-center max-w-md">
             <MapContainer center={currentLocation} zoom={13} zoomControl={false} className="w-full h-screen">
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -65,6 +66,12 @@ const MapPage = () => {
                 />
                 {position && <Marker position={position} icon={userMarker()} />}
                 <FlyToUserLocation position={currentLocation} />
+                {/* {(position && selectedTree && isNavigate) &&
+                    <RoutingMachine
+                        start={position}
+                        end={[Number(selectedTree.latitudine), Number(selectedTree.longitudine)]}
+                    />
+                } */}
                 {allReports.map(report => {
                     const isBadCondition = report.stato !== "Buono";
                     return (
