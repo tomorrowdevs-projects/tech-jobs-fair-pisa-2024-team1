@@ -30,6 +30,7 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
     const { position } = useUserLocation()
     const { addReport, loading } = useReports()
     const [error, setError] = useState<string>()
+    const [isCurrentLocation, setIsCurrentLocation] = useState<boolean>(false)
 
     const handleChange = (key: string, value: string) => {
         const newReport = report ? { ...report } : {}
@@ -63,7 +64,6 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
         }
     }
 
-
     return (
         <div id="slideover-container" className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? '' : 'invisible'} z-[500]`}>
             <div
@@ -93,12 +93,15 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                                 <SearchInput
                                     setLocation={(place) => {
                                         handleChangeLocation([place?.lat, place?.lon] as [number, number])
+                                        setIsCurrentLocation(false)
                                     }}
+                                    isCurrentLocation={isCurrentLocation}
                                     className="border border-black outline-none p-2 w-full"
                                 />
                                 <button className="absolute top-[3px] right-1 p-2" onClick={() => {
                                     if (position) {
                                         handleChangeLocation(position)
+                                        setIsCurrentLocation(true)
                                     }
                                 }}>
                                     <TbLocationFilled size={20} />
