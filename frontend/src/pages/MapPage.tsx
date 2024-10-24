@@ -1,15 +1,15 @@
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { useUserLocation } from "../hooks/useUserLocation";
-import { useEffect, useMemo, useState } from "react";
-import { Logo } from "../components/Logo";
-import { treeMarker, userMarker } from "../components/markers";
-import SearchInput from "../components/Search";
-import { MdOutlineMyLocation } from "react-icons/md";
-import Modal from "../components/Modal";
-import { useReports } from "../hooks/useReports";
-import TreeCard from "../components/TreeCard";
-import { Report } from "../types";
-import RoutingMachine from "../components/RoutingMachine";
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { useUserLocation } from '../hooks/useUserLocation';
+import { useEffect, useMemo, useState } from 'react';
+import { Logo } from '../components/Logo';
+import { treeMarker, userMarker } from '../components/markers';
+import SearchInput from '../components/Search';
+import { MdOutlineMyLocation } from 'react-icons/md';
+import Modal from '../components/Modal';
+import { useReports } from '../hooks/useReports';
+import TreeCard from '../components/TreeCard';
+import { Report } from '../types';
+import RoutingMachine from '../components/RoutingMachine';
 
 export interface Place {
   display_name?: string;
@@ -17,7 +17,11 @@ export interface Place {
   lon?: number;
 }
 
-const FlyToUserLocation = ({ position }: { position: [number, number] | null }) => {
+const FlyToUserLocation = ({
+  position,
+}: {
+  position: [number, number] | null;
+}) => {
   const map = useMap();
 
   useEffect(() => {
@@ -59,9 +63,9 @@ const MapPage = () => {
   };
 
   const handleOpenModal = () => {
-    setIsOpen(true)
-    handleCloseModal()
-  }
+    setIsOpen(true);
+    handleCloseModal();
+  };
 
   useEffect(() => {
     findReports();
@@ -69,7 +73,12 @@ const MapPage = () => {
 
   return (
     <div className="h-screen relative flex items-center max-w-md">
-      <MapContainer center={currentLocation} zoom={13} zoomControl={false} className="w-full h-screen">
+      <MapContainer
+        center={currentLocation}
+        zoom={13}
+        zoomControl={false}
+        className="w-full h-screen"
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -78,11 +87,17 @@ const MapPage = () => {
         <FlyToUserLocation position={currentLocation} />
 
         {position && selectedTree && isNavigate && (
-          <RoutingMachine start={position} end={[Number(selectedTree.latitudine), Number(selectedTree.longitudine)]} />
+          <RoutingMachine
+            start={position}
+            end={[
+              Number(selectedTree.latitudine),
+              Number(selectedTree.longitudine),
+            ]}
+          />
         )}
 
-        {allReports.map(report => {
-          const isBadCondition = report.stato !== "Buono";
+        {allReports.map((report) => {
+          const isBadCondition = report.stato !== 'Buono';
           return (
             <Marker
               key={report.id}
@@ -90,8 +105,8 @@ const MapPage = () => {
               icon={treeMarker(isBadCondition)}
               eventHandlers={{
                 click: () => {
-                  setSelectedTree(report)
-                  setIsNavigate(false)
+                  setSelectedTree(report);
+                  setIsNavigate(false);
                 },
               }}
             />
@@ -114,14 +129,31 @@ const MapPage = () => {
       </div>
 
       <div className="absolute top-1/2 right-4 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
-        <button onClick={() => setLocation(position ? { lat: position[0], lon: position[1] } : null)}>
+        <button
+          onClick={() =>
+            setLocation(
+              position ? { lat: position[0], lon: position[1] } : null
+            )
+          }
+        >
           <MdOutlineMyLocation size={30} />
         </button>
       </div>
 
-      <Modal setIsOpen={setIsOpen} isOpen={isOpen} selectedTree={selectedTree} />
+      <Modal
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        selectedTree={selectedTree}
+      />
 
-      {selectedTree && <TreeCard selectedTree={selectedTree} onClose={handleCloseModal} onNavigate={handleNavigate} onOpenModal={handleOpenModal} />}
+      {selectedTree && (
+        <TreeCard
+          selectedTree={selectedTree}
+          onClose={handleCloseModal}
+          onNavigate={handleNavigate}
+          onOpenModal={handleOpenModal}
+        />
+      )}
     </div>
   );
 };
