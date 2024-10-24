@@ -1,10 +1,10 @@
 export interface Report {
-    id?: number
-    tipo: string
-    nome: string
-    latitudine: string
-    longitudine: string
-    stato: string
-    ultima_segnalazione: string
-    immagine?: string
+  id?: number;
+  tipo: string;
+  nome: string;
+  latitudine: string;
+  longitudine: string;
+  stato: string;
+  ultima_segnalazione: string;
+  immagine?: string;
 }

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";;
-import SearchInput from "./Search";;
-import { TbLocationFilled } from "react-icons/tb";;
-import { useUserLocation } from "../hooks/useUserLocation";;
-import { Report } from "../types";;
-import { useReports } from "../hooks/useReports";;
-import { z, ZodError } from "zod";;
-import { AxiosError } from "axios";;
+import { useEffect, useState } from 'react';
+import SearchInput from './Search';
+import { TbLocationFilled } from 'react-icons/tb';
+import { useUserLocation } from '../hooks/useUserLocation';
+import { Report } from '../types';
+import { useReports } from '../hooks/useReports';
+import { z, ZodError } from 'zod';
+import { AxiosError } from 'axios';
 
 interface ModalProps {
   isOpen: boolean;
@@ -14,27 +14,34 @@ interface ModalProps {
 }
 
 const ReportSchema = z.object({
-  tipo: z.string().min(1, { message: "Type is required" }),
-  nome: z.string().min(1, { message: "Name is required" }),
-  latitudine: z.string().min(1, { message: "Place is required" }),
-  longitudine: z.string().min(1, { message: "Place is required" }),
-  stato: z.string().min(1, { message: "Status is required" }),
+  tipo: z.string().min(1, { message: 'Type is required' }),
+  nome: z.string().min(1, { message: 'Name is required' }),
+  latitudine: z.string().min(1, { message: 'Place is required' }),
+  longitudine: z.string().min(1, { message: 'Place is required' }),
+  stato: z.string().min(1, { message: 'Status is required' }),
 });
 
 const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
-  const [report, setReport] = useState<Report | null>(null);;
-  const { position } = useUserLocation();;
-  const { addReport, loading, editReport } = useReports();;
+  const [report, setReport] = useState<Report | null>({
+    tipo: '',
+    nome: '',
+    latitudine: '',
+    longitudine: '',
+    stato: '',
+    ultima_segnalazione: ''
+  });
+  const { position } = useUserLocation();
+  const { addReport, loading, editReport } = useReports();
   const [error, setError] = useState<string>();
-  const [isSick, setIsSick] = useState<boolean | null>(null);;
-  const [isCurrentLocation, setIsCurrentLocation] = useState<boolean>(false)
+  const [isSick, setIsSick] = useState<boolean | null>(null);
+  const [isCurrentLocation, setIsCurrentLocation] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedTree) {
-      setReport(selectedTree)
-      setIsSick(selectedTree?.stato !== "Buono")
+      setReport(selectedTree);
+      setIsSick(selectedTree?.stato !== 'Buono');
     }
-  }, [selectedTree])
+  }, [selectedTree]);
 
   const handleChange = (key: string, value: string) => {
     const newReport = report ? { ...report } : {};
@@ -53,15 +60,15 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   const handleSubmit = () => {
     try {
       ReportSchema.parse(report);
-      const todayDate = new Date().toISOString().split("T")[0]
-      const newData = { ...report, ultima_segnalazione: todayDate } as Report
+      const todayDate = new Date().toISOString().split('T')[0];
+      const newData = { ...report, ultima_segnalazione: todayDate } as Report;
       if (selectedTree) {
-        editReport(newData)
+        editReport(newData);
       } else {
         addReport(newData);
       }
       setReport(null);
-      setError("");
+      setError('');
       setIsOpen(false);
     } catch (err) {
       if (err instanceof ZodError) {
@@ -69,7 +76,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       } else if (err instanceof AxiosError || err instanceof Error) {
         setError(err.message);
       } else {
-        setError("Ops, something went wrong!");
+        setError('Ops, something went wrong!');
       }
     }
   };
@@ -77,7 +84,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   return (
     <div
       id="slideover-container"
-      className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? "" : "invisible"} z-[500]`}
+      className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? '' : 'invisible'} z-[500]`}
     >
       <div
         onClick={() => {
@@ -85,11 +92,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
           setIsOpen(false);
         }}
         id="slideover-bg"
-        className={`w-full h-full duration-500 ease-out transition-all inset-0 absolute bg-gray-900 ${isOpen ? "opacity-50" : "opacity-0"}`}
+        className={`w-full h-full duration-500 ease-out transition-all inset-0 absolute bg-gray-900 ${isOpen ? 'opacity-50' : 'opacity-0'}`}
       />
       <div
         id="slideover"
-        className={`w-full rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${isOpen ? "top-20" : "top-full"}`}
+        className={`w-full rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${isOpen ? 'top-20' : 'top-full'}`}
       >
         <div className="w-full h-[90%] flex flex-col justify-start items-center">
           <div className="w-1/2 bg-gray-200 rounded-full h-[7px]" />
@@ -99,7 +106,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
               <span className="font-semibold">Tipo</span>
               <select
                 className="border border-black outline-none p-2"
-                onChange={(e) => handleChange("tipo", e.currentTarget.value)}
+                onChange={(e) => handleChange('tipo', e.currentTarget.value)}
                 defaultValue={report?.tipo}
               >
                 <option value="" disabled>
@@ -116,20 +123,21 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 type="text"
                 placeholder="Aggiungi un nome..."
                 className="border border-black outline-none p-2"
-                onChange={(e) => handleChange("nome", e.currentTarget.value)}
+                onChange={(e) => handleChange('nome', e.currentTarget.value)}
                 value={report?.nome}
               />
             </div>
-            {selectedTree &&
+            {selectedTree && (
               <div className="flex flex-col justify-center gap-1">
                 <span className="font-semibold">Posizione</span>
                 <div className="relative">
                   <SearchInput
                     setLocation={(place) => {
-                      handleChangeLocation(
-                        [place?.lat, place?.lon] as [number, number]
-                      );
-                      setIsCurrentLocation(false)
+                      handleChangeLocation([place?.lat, place?.lon] as [
+                        number,
+                        number,
+                      ]);
+                      setIsCurrentLocation(false);
                     }}
                     isCurrentLocation={isCurrentLocation}
                     className="border border-black outline-none p-2 w-full"
@@ -139,7 +147,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     onClick={() => {
                       if (position) {
                         handleChangeLocation(position);
-                        setIsCurrentLocation(true)
+                        setIsCurrentLocation(true);
                       }
                     }}
                   >
@@ -147,30 +155,30 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   </button>
                 </div>
               </div>
-            }
+            )}
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Stato</span>
               <div className="flex flex-row justify-center gap-4">
                 {/* Modificato qui per allineare i pulsanti */}
                 <button
                   onClick={() => {
-                    handleChange("stato", "Buono")
-                    setIsSick(false)
+                    handleChange('stato', 'Buono');
+                    setIsSick(false);
                   }}
                   className={`px-4 py-2 border ${isSick === false
-                    ? "bg-[#334D42] text-[#EFE9CE]"
-                    : "bg-white text-black border-black"
+                      ? 'bg-[#334D42] text-[#EFE9CE]'
+                      : 'bg-white text-black border-black'
                     } w-full font-semibold`}
                 >
                   Buono
                 </button>
                 <button
                   onClick={() => {
-                    setIsSick(true)
+                    setIsSick(true);
                   }}
                   className={`px-4 py-2 border ${isSick
-                    ? "bg-[#CE6146] text-[#EFE9CE]"
-                    : "bg-white text-black border-black"
+                      ? 'bg-[#CE6146] text-[#EFE9CE]'
+                      : 'bg-white text-black border-black'
                     } w-full font-semibold `}
                 >
                   Malato
@@ -185,7 +193,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     placeholder="Describe eventual problems (i.e. broken branch, sick, ...)"
                     className="w-full border border-black outline-none p-2"
                     onChange={(e) =>
-                      handleChange("stato", e.currentTarget.value)
+                      handleChange('stato', e.currentTarget.value)
                     }
                     value={report?.stato}
                   />
@@ -204,7 +212,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
             {error && <p className="font-semibold text-red-500">{error}</p>}
             <button
               disabled={loading}
-              className={`w-full p-4 ${loading ? "bg-[#334D42]/75 text-[#EFE9CE]/75" : "bg-[#334D42] text-[#EFE9CE]"} bg-[#334D42] text-[#EFE9CE] font-semibold text-lg rounded-[4px]`}
+              className={`w-full p-4 ${loading ? 'bg-[#334D42]/75 text-[#EFE9CE]/75' : 'bg-[#334D42] text-[#EFE9CE]'} bg-[#334D42] text-[#EFE9CE] font-semibold text-lg rounded-[4px]`}
               onClick={handleSubmit}
             >
               Segnala
@@ -212,7 +220,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

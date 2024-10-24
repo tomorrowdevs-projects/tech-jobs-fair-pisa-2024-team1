@@ -7,15 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@nanostores/react": "^0.7.3",
+    "@types/leaflet-routing-machine": "^3.2.8",
     "axios": "^1.7.7",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "moment": "^2.30.1",
     "nanostores": "^0.11.3",
+    "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-datepicker": "^7.3.0",
     "react-dom": "^18.3.1",

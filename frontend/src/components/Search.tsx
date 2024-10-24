@@ -5,36 +5,44 @@ import { Place } from '../pages/MapPage';
 import { IoCloseOutline } from 'react-icons/io5';
 
 interface SearchInputProps {
-  setLocation: (value: Place) => void
-  className: string
-  includeIcon?: boolean
-  isCurrentLocation?: boolean
+  setLocation: (value: Place) => void;
+  className: string;
+  includeIcon?: boolean;
+  isCurrentLocation?: boolean;
 }
 
-const SearchInput = ({ setLocation, className, includeIcon = false, isCurrentLocation = false }: SearchInputProps) => {
-  const [query, setQuery] = useState<string>("");
-  const [currentPlace, setCurrentPlace] = useState<Place | null>(null)
+const SearchInput = ({
+  setLocation,
+  className,
+  includeIcon = false,
+  isCurrentLocation = false,
+}: SearchInputProps) => {
+  const [query, setQuery] = useState<string>('');
+  const [currentPlace, setCurrentPlace] = useState<Place | null>(null);
   const [results, setResults] = useState<Place[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const [isFocused, setIsFocused] = useState<boolean>(false)
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   useEffect(() => {
     if (isCurrentLocation) {
-      setQuery("Current Location")
+      setQuery('Current Location');
     }
-  }, [isCurrentLocation])
+  }, [isCurrentLocation]);
 
   const searchPlaces = async (searchQuery: string) => {
     try {
-      const response = await axios.get('https://nominatim.openstreetmap.org/search', {
-        params: {
-          q: searchQuery,
-          format: 'json',
-          addressdetails: 1,
-          // countrycodes: "it",
-          limit: 5,
-        },
-      });
+      const response = await axios.get(
+        'https://nominatim.openstreetmap.org/search',
+        {
+          params: {
+            q: searchQuery,
+            format: 'json',
+            addressdetails: 1,
+            // countrycodes: "it",
+            limit: 5,
+          },
+        }
+      );
       setResults(response.data);
       setShowSuggestions(true);
     } catch (error) {
@@ -60,7 +68,7 @@ const SearchInput = ({ setLocation, className, includeIcon = false, isCurrentLoc
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && results.length > 0) {
+    if (e.key === 'Enter' && results.length > 0) {
       handleSelect(results[0]);
     }
   };
@@ -74,11 +82,14 @@ const SearchInput = ({ setLocation, className, includeIcon = false, isCurrentLoc
         value={query}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        onFocus={() => setIsFocused(prev => !prev)}
+        onFocus={() => setIsFocused((prev) => !prev)}
       />
       {includeIcon ? (
         isFocused && !!query ? (
-          <button className="absolute top-[11px] right-5" onClick={() => setQuery("")}>
+          <button
+            className="absolute top-[11px] right-5"
+            onClick={() => setQuery('')}
+          >
             <IoCloseOutline color="#878585" size={35} />
           </button>
         ) : (
@@ -97,7 +108,11 @@ const SearchInput = ({ setLocation, className, includeIcon = false, isCurrentLoc
       {showSuggestions && results.length > 0 && (
         <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1">
           {results.map((place, index) => (
-            <li key={index} className="p-2 hover:bg-gray-100 cursor-pointer" onClick={() => handleSelect(place)}>
+            <li
+              key={index}
+              className="p-2 hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleSelect(place)}
+            >
               {place.display_name}
             </li>
           ))}

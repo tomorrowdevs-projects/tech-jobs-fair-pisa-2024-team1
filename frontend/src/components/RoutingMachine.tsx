@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import L from "leaflet";
-import "leaflet-routing-machine";
-import { useMap } from "react-leaflet";
+import { useEffect } from 'react';
+import L from 'leaflet';
+import 'leaflet-routing-machine';
+import { useMap } from 'react-leaflet';
 
 interface RoutingMachineProps {
   start: [number, number];
@@ -17,11 +17,19 @@ const RoutingMachine = ({ start, end }: RoutingMachineProps) => {
     const routingControl = L.Routing.control({
       waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
       routeWhileDragging: true,
-      createMarker: () => null,
+      plan: new L.Routing.Plan(
+        [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+        {
+          createMarker: () => {
+            return false
+          }
+        }
+      ),
       addWaypoints: false,
-      draggableWaypoints: false,
       lineOptions: {
-        styles: [{ color: "#3b82f6", weight: 3 }],
+        styles: [{ color: '#3b82f6', weight: 3 }],
+        extendToWaypoints: false,
+        missingRouteTolerance: 0
       },
     }).addTo(map);
 
