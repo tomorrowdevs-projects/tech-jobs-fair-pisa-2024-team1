@@ -90,12 +90,17 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
           <div className="flex flex-col w-full h-full p-2 gap-4">
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Type</span>
-              <input
-                type="text"
-                placeholder="Add a type..."
+              <select
                 className="border border-black outline-none p-2"
                 onChange={(e) => handleChange("tipo", e.currentTarget.value)}
-              />
+              >
+                <option value="" disabled>
+                  Select a type...
+                </option>
+                <option value="albero">Albero</option>
+                <option value="parco">Parco</option>
+                <option value="giardino">Giardino</option>
+              </select>
             </div>
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Name</span>
@@ -132,7 +137,9 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
             </div>
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Status</span>
-              <div className="flex flex-row justify-center gap-4"> {/* Modificato qui per allineare i pulsanti */}
+              <div className="flex flex-row justify-center gap-4">
+                {" "}
+                {/* Modificato qui per allineare i pulsanti */}
                 <button
                   onClick={() => handleButtonClick("Buono")}
                   className={`px-4 py-2 border ${
@@ -143,7 +150,6 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                 >
                   In buono stato
                 </button>
-            
                 <button
                   onClick={() => handleButtonClick("Malato")}
                   className={`px-4 py-2 border ${
@@ -157,12 +163,16 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
               </div>
               {/* Campo input per la descrizione dei problemi */}
               {stato === "Malato" && (
-                <div className="mt-2"> {/* Aggiunto margin-top per separare dall'input */}
+                <div className="mt-2">
+                  {" "}
+                  {/* Aggiunto margin-top per separare dall'input */}
                   <input
                     type="text"
                     placeholder="Descrivi eventuali problemi (es. Rami rotti, Malato, ...)"
                     className="w-full border border-black outline-none p-2"
-                    onChange={(e) => handleChange("stato", e.currentTarget.value)}
+                    onChange={(e) =>
+                      handleChange("stato", e.currentTarget.value)
+                    }
                   />
                 </div>
               )}
