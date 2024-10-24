@@ -27,6 +27,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   const { addReport, loading, editReport } = useReports();;
   const [error, setError] = useState<string>();
   const [isSick, setIsSick] = useState<boolean | null>(null);;
+  const [isCurrentLocation, setIsCurrentLocation] = useState<boolean>(false)
 
   useEffect(() => {
     if (selectedTree) {
@@ -34,8 +35,6 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       setIsSick(selectedTree?.stato !== "Buono")
     }
   }, [selectedTree])
-
-  console.log(report)
 
   const handleChange = (key: string, value: string) => {
     const newReport = report ? { ...report } : {};
@@ -128,8 +127,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   <SearchInput
                     setLocation={(place) => {
                       handleChangeLocation(
-                        [place?.lat, place?.lon] as [number, number,]);
+                        [place?.lat, place?.lon] as [number, number]
+                      );
+                      setIsCurrentLocation(false)
                     }}
+                    isCurrentLocation={isCurrentLocation}
                     className="border border-black outline-none p-2 w-full"
                   />
                   <button
@@ -137,6 +139,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     onClick={() => {
                       if (position) {
                         handleChangeLocation(position);
+                        setIsCurrentLocation(true)
                       }
                     }}
                   >

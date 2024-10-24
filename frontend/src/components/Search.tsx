@@ -1,36 +1,44 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { IoIosSearch } from "react-icons/io";
-import { Place } from "../pages/MapPage";
-import { IoCloseOutline } from "react-icons/io5";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { IoIosSearch } from 'react-icons/io';
+import { Place } from '../pages/MapPage';
+import { IoCloseOutline } from 'react-icons/io5';
 
 interface SearchInputProps {
-  setLocation: (value: Place) => void;
-  className: string;
-  includeIcon?: boolean;
+  setLocation: (value: Place) => void
+  className: string
+  includeIcon?: boolean
+  isCurrentLocation?: boolean
 }
 
-const SearchInput = ({ setLocation, className, includeIcon = false }: SearchInputProps) => {
+const SearchInput = ({ setLocation, className, includeIcon = false, isCurrentLocation = false }: SearchInputProps) => {
   const [query, setQuery] = useState<string>("");
-  const [currentPlace, setCurrentPlace] = useState<Place | null>(null);
+  const [currentPlace, setCurrentPlace] = useState<Place | null>(null)
   const [results, setResults] = useState<Place[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (isCurrentLocation) {
+      setQuery("Current Location")
+    }
+  }, [isCurrentLocation])
 
   const searchPlaces = async (searchQuery: string) => {
     try {
-      const response = await axios.get("https://nominatim.openstreetmap.org/search", {
+      const response = await axios.get('https://nominatim.openstreetmap.org/search', {
         params: {
           q: searchQuery,
-          format: "json",
+          format: 'json',
           addressdetails: 1,
+          // countrycodes: "it",
           limit: 5,
         },
       });
       setResults(response.data);
       setShowSuggestions(true);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
     }
   };
 
