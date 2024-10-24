@@ -24,7 +24,7 @@ const ReportSchema = z.object({
 const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   const [report, setReport] = useState<Report | null>(null);;
   const { position } = useUserLocation();;
-  const { addReport, loading } = useReports();;
+  const { addReport, loading, editReport } = useReports();;
   const [error, setError] = useState<string>();
   const [isSick, setIsSick] = useState<boolean | null>(null);;
 
@@ -54,7 +54,13 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   const handleSubmit = () => {
     try {
       ReportSchema.parse(report);
-      addReport({ ...report, ultima_segnalazione: new Date().toISOString().split("T")[0] } as Report);
+      const todayDate = new Date().toISOString().split("T")[0]
+      const newData = { ...report, ultima_segnalazione: todayDate } as Report
+      if (selectedTree) {
+        editReport(newData)
+      } else {
+        addReport(newData);
+      }
       setReport(null);
       setError("");
       setIsOpen(false);
@@ -115,28 +121,30 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 value={report?.nome}
               />
             </div>
-            <div className="flex flex-col justify-center gap-1">
-              <span className="font-semibold">Posizione</span>
-              <div className="relative">
-                <SearchInput
-                  setLocation={(place) => {
-                    handleChangeLocation(
-                      [place?.lat, place?.lon] as [number, number,]);
-                  }}
-                  className="border border-black outline-none p-2 w-full"
-                />
-                <button
-                  className="absolute top-[3px] right-1 p-2"
-                  onClick={() => {
-                    if (position) {
-                      handleChangeLocation(position);
-                    }
-                  }}
-                >
-                  <TbLocationFilled size={20} />
-                </button>
+            {selectedTree &&
+              <div className="flex flex-col justify-center gap-1">
+                <span className="font-semibold">Posizione</span>
+                <div className="relative">
+                  <SearchInput
+                    setLocation={(place) => {
+                      handleChangeLocation(
+                        [place?.lat, place?.lon] as [number, number,]);
+                    }}
+                    className="border border-black outline-none p-2 w-full"
+                  />
+                  <button
+                    className="absolute top-[3px] right-1 p-2"
+                    onClick={() => {
+                      if (position) {
+                        handleChangeLocation(position);
+                      }
+                    }}
+                  >
+                    <TbLocationFilled size={20} />
+                  </button>
+                </div>
               </div>
-            </div>
+            }
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Stato</span>
               <div className="flex flex-row justify-center gap-4">
@@ -182,7 +190,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
               )}
             </div>
             <div className="flex flex-col justify-center gap-1 h-full">
-              <span className="font-semibold">Image</span>
+              <span className="font-semibold">Immagine</span>
               <div className="border-2 border-dashed border-gray-400 bg-gray-100 w-full h-full flex justify-center items-center">
                 <p className="text-center text-gray-400">
                   Aggiungi un immagine <br />
