@@ -140,9 +140,9 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                                         setIsSick(false)
                                     }}
                                     className={`px-4 py-2 border ${isSick === false
-                                        ? "bg-green-500 text-white"
+                                        ? "bg-[#334D42] text-[#EFE9CE]"
                                         : "bg-white text-black border-black"
-                                        } w-full`}
+                                        } w-full font-semibold`}
                                 >
                                     Good
                                 </button>
@@ -151,9 +151,9 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                                         setIsSick(true)
                                     }}
                                     className={`px-4 py-2 border ${isSick
-                                        ? "bg-red-500 text-white"
+                                        ? "bg-[#CE6146] text-[#EFE9CE]"
                                         : "bg-white text-black border-black"
-                                        } w-full`}
+                                        } w-full font-semibold `}
                                 >
                                     Bad
                                 </button>
