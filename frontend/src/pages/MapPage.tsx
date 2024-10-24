@@ -58,9 +58,14 @@ const MapPage = () => {
     setIsNavigate(true);
   };
 
+  const handleOpenModal = () => {
+    setIsOpen(true)
+    handleCloseModal()
+  }
+
   useEffect(() => {
     findReports();
-  }, [findReports]);
+  }, []);
 
   return (
     <div className="h-screen relative flex items-center max-w-md">
@@ -84,7 +89,10 @@ const MapPage = () => {
               position={[Number(report.latitudine), Number(report.longitudine)]}
               icon={treeMarker(isBadCondition)}
               eventHandlers={{
-                click: () => setSelectedTree(report),
+                click: () => {
+                  setSelectedTree(report)
+                  setIsNavigate(false)
+                },
               }}
             />
           );
@@ -105,15 +113,15 @@ const MapPage = () => {
         </button>
       </div>
 
-      <div className="absolute top-1/2 right-2 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
+      <div className="absolute top-1/2 right-4 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
         <button onClick={() => setLocation(position ? { lat: position[0], lon: position[1] } : null)}>
           <MdOutlineMyLocation size={30} />
         </button>
       </div>
 
-      <Modal setIsOpen={setIsOpen} isOpen={isOpen} />
+      <Modal setIsOpen={setIsOpen} isOpen={isOpen} selectedTree={selectedTree} />
 
-      {selectedTree && <TreeCard selectedTree={selectedTree} onClose={handleCloseModal} onNavigate={handleNavigate} />}
+      {selectedTree && <TreeCard selectedTree={selectedTree} onClose={handleCloseModal} onNavigate={handleNavigate} onOpenModal={handleOpenModal} />}
     </div>
   );
 };

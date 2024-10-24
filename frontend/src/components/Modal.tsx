@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "./Search";
 import { TbLocationFilled } from "react-icons/tb";
 import { useUserLocation } from "../hooks/useUserLocation";
@@ -10,6 +10,7 @@ import { AxiosError } from "axios";
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
+  selectedTree: Report | null
 }
 
 const ReportSchema = z.object({
@@ -20,11 +21,19 @@ const ReportSchema = z.object({
   stato: z.string().min(1, { message: "Status is required" }),
 });
 
-const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
+const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   const [report, setReport] = useState<Report | null>(null);
   const { position } = useUserLocation();
   const { addReport, loading } = useReports();
   const [error, setError] = useState<string>();
+
+  useEffect(() => {
+    if (selectedTree) {
+      setReport(selectedTree)
+    }
+  }, [selectedTree])
+
+  console.log(report)
 
   const handleChange = (key: string, value: string) => {
     const newReport = report ? { ...report } : {};
@@ -69,15 +78,13 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
           setIsOpen(false);
         }}
         id="slideover-bg"
-        className={`w-full h-full duration-500 ease-out transition-all inset-0 absolute bg-gray-900 ${
-          isOpen ? "opacity-50" : "opacity-0"
-        }`}
+        className={`w-full h-full duration-500 ease-out transition-all inset-0 absolute bg-gray-900 ${isOpen ? "opacity-50" : "opacity-0"
+          }`}
       />
       <div
         id="slideover"
-        className={`w-full rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${
-          isOpen ? "top-20" : "top-full"
-        }`}
+        className={`w-full rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${isOpen ? "top-20" : "top-full"
+          }`}
       >
         <div className="w-full h-[90%] flex flex-col justify-start items-center">
           <div className="w-1/2 bg-gray-200 rounded-full h-[7px]" />
@@ -90,6 +97,7 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                 placeholder="Aggiungi un tipo di albero..."
                 className="border border-black outline-none p-2"
                 onChange={e => handleChange("tipo", e.currentTarget.value)}
+                value={report?.tipo}
               />
             </div>
             <div className="flex flex-col justify-center gap-1">
@@ -99,6 +107,7 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                 placeholder="Aggiungi un nome..."
                 className="border border-black outline-none p-2"
                 onChange={e => handleChange("nome", e.currentTarget.value)}
+                value={report?.nome}
               />
             </div>
             <div className="flex flex-col justify-center gap-1">
@@ -129,6 +138,7 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                 placeholder="Aggiungi uno stato..."
                 className="border border-black outline-none p-2"
                 onChange={e => handleChange("stato", e.currentTarget.value)}
+
               />
             </div>
             <div className="flex flex-col justify-center gap-1 h-full">
@@ -143,9 +153,8 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
             {error && <p className="font-semibold text-red-500">{error}</p>}
             <button
               disabled={loading}
-              className={`w-full p-4 ${
-                loading ? "bg-[#334D42]/75 text-[#EFE9CE]/75" : "bg-[#334D42] text-[#EFE9CE]"
-              } bg-[#334D42] text-[#EFE9CE] font-semibold text-lg rounded-[4px]`}
+              className={`w-full p-4 ${loading ? "bg-[#334D42]/75 text-[#EFE9CE]/75" : "bg-[#334D42] text-[#EFE9CE]"
+                } bg-[#334D42] text-[#EFE9CE] font-semibold text-lg rounded-[4px]`}
               onClick={handleSubmit}
             >
               Invia segnalazione
