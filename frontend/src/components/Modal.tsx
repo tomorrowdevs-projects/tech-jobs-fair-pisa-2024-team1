@@ -25,6 +25,7 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
     const { position } = useUserLocation();
     const { addReport, loading } = useReports();
     const [error, setError] = useState<string>();
+    const [isSick, setIsSick] = useState<boolean | null>(null);
 
     const handleChange = (key: string, value: string) => {
         const newReport = report ? { ...report } : {};
@@ -38,12 +39,6 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
             latitudine: newLocation[0].toString(),
             longitudine: newLocation[1].toString(),
         } as Report);
-    };
-
-    const [stato, setStato] = useState("");
-    const handleButtonClick = (valore: string) => {
-        setStato(valore);
-        handleChange("stato", valore); // Chiamata a handleChange con il nuovo valore
     };
 
     const handleSubmit = () => {
@@ -97,9 +92,9 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                                 <option value="" disabled>
                                     Select a type...
                                 </option>
-                                <option value="albero">Albero</option>
-                                <option value="parco">Parco</option>
-                                <option value="giardino">Giardino</option>
+                                <option value="tree">Tree</option>
+                                <option value="park">Park</option>
+                                <option value="garden">Garden</option>
                             </select>
                         </div>
                         <div className="flex flex-col justify-center gap-1">
@@ -138,35 +133,38 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                         <div className="flex flex-col justify-center gap-1">
                             <span className="font-semibold">Status</span>
                             <div className="flex flex-row justify-center gap-4">
-                                {" "}
                                 {/* Modificato qui per allineare i pulsanti */}
                                 <button
-                                    onClick={() => handleButtonClick("Buono")}
-                                    className={`px-4 py-2 border ${stato === "Buono"
-                                            ? "bg-green-500 text-white"
-                                            : "bg-white text-black border-black"
-                                        }`}
+                                    onClick={() => {
+                                        handleChange("stato", "Good")
+                                        setIsSick(false)
+                                    }}
+                                    className={`px-4 py-2 border ${isSick === false
+                                        ? "bg-green-500 text-white"
+                                        : "bg-white text-black border-black"
+                                        } w-full`}
                                 >
-                                    In buono stato
+                                    Good
                                 </button>
                                 <button
-                                    onClick={() => handleButtonClick("Malato")}
-                                    className={`px-4 py-2 border ${stato === "Malato"
-                                            ? "bg-red-500 text-white"
-                                            : "bg-white text-black border-black"
-                                        }`}
+                                    onClick={() => {
+                                        setIsSick(true)
+                                    }}
+                                    className={`px-4 py-2 border ${isSick
+                                        ? "bg-red-500 text-white"
+                                        : "bg-white text-black border-black"
+                                        } w-full`}
                                 >
-                                    Segnalazione
+                                    Bad
                                 </button>
                             </div>
                             {/* Campo input per la descrizione dei problemi */}
-                            {stato === "Malato" && (
+                            {isSick && (
                                 <div className="mt-2">
-                                    {" "}
                                     {/* Aggiunto margin-top per separare dall'input */}
                                     <input
                                         type="text"
-                                        placeholder="Descrivi eventuali problemi (es. Rami rotti, Malato, ...)"
+                                        placeholder="Describe eventual problems (i.e. broken branch, sick, ...)"
                                         className="w-full border border-black outline-none p-2"
                                         onChange={(e) =>
                                             handleChange("stato", e.currentTarget.value)
@@ -195,7 +193,7 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
