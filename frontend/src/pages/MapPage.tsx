@@ -10,6 +10,8 @@ import { useReports } from '../hooks/useReports';
 import TreeCard from '../components/TreeCard';
 import { Report } from '../types';
 import RoutingMachine from '../components/RoutingMachine';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 export interface Place {
   display_name?: string;
