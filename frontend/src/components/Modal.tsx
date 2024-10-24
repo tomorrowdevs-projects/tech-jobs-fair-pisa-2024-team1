@@ -132,42 +132,37 @@ const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
             </div>
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Status</span>
-              {/* <input type="text" placeholder="Add a status..." className="border border-black outline-none p-2" onChange={(e) => handleChange("stato", e.currentTarget.value)} /> */}
-
-              <button
-                onClick={() => handleButtonClick("Buono")}
-                className={`px-4 py-2 border ${
-                  stato === "Buono"
-                    ? "bg-green-500 text-white"
-                    : "bg-white text-black border-black"
-                }`}
-              >
-                In buono stato
-              </button>
-
-              <button
-                onClick={() => handleButtonClick("Malato")}
-                className={`px-4 py-2 border ${
-                  stato === "Malato"
-                    ? "bg-red-500 text-white"
-                    : "bg-white text-black border-black"
-                }`}
-              >
-                Seganalzione
-              </button>
-              {/* Input per segnalare eventuali problemi, appare solo se "Malato" è selezionato */}
+              <div className="flex flex-row justify-center gap-4"> {/* Modificato qui per allineare i pulsanti */}
+                <button
+                  onClick={() => handleButtonClick("Buono")}
+                  className={`px-4 py-2 border ${
+                    stato === "Buono"
+                      ? "bg-green-500 text-white"
+                      : "bg-white text-black border-black"
+                  }`}
+                >
+                  In buono stato
+                </button>
+            
+                <button
+                  onClick={() => handleButtonClick("Malato")}
+                  className={`px-4 py-2 border ${
+                    stato === "Malato"
+                      ? "bg-red-500 text-white"
+                      : "bg-white text-black border-black"
+                  }`}
+                >
+                  Segnalazione
+                </button>
+              </div>
+              {/* Campo input per la descrizione dei problemi */}
               {stato === "Malato" && (
-                <div className="flex flex-col space-y-2">
-                  <label htmlFor="problemi" className="text-gray-700">
-                    Descrivi eventuali problemi:
-                  </label>
+                <div className="mt-2"> {/* Aggiunto margin-top per separare dall'input */}
                   <input
                     type="text"
-                    placeholder="Rami rotti, Malato, ..."
-                    className="border border-black outline-none p-2"
-                    onChange={(e) =>
-                      handleChange("stato", e.currentTarget.value)
-                    }
+                    placeholder="Descrivi eventuali problemi (es. Rami rotti, Malato, ...)"
+                    className="w-full border border-black outline-none p-2"
+                    onChange={(e) => handleChange("stato", e.currentTarget.value)}
                   />
                 </div>
               )}
