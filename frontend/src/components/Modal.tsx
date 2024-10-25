@@ -46,7 +46,12 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       setIsEdit(true);
       setIsSick(selectedTree?.stato !== 'Buono');
     }
-  }, [selectedTree]);
+    if (!isOpen && !selectedTree) {
+      setReport(initialState);
+      setIsEdit(false);
+      setIsSick(null)
+    }
+  }, [selectedTree, isOpen]);
 
   const handleChange = (key: string, value: string) => {
     const newReport = report ? { ...report } : {};
