@@ -14,11 +14,11 @@ interface ModalProps {
 }
 
 const ReportSchema = z.object({
-  tipo: z.string().min(1, { message: 'Type is required' }),
-  nome: z.string().min(1, { message: 'Name is required' }),
-  latitudine: z.string().min(1, { message: 'Place is required' }),
-  longitudine: z.string().min(1, { message: 'Place is required' }),
-  stato: z.string().min(1, { message: 'Status is required' }),
+  tipo: z.string().min(1, { message: 'Il Tipo è richiesto' }),
+  nome: z.string().min(1, { message: 'Il Nome è richiesto' }),
+  latitudine: z.string().min(1, { message: 'La Posizione è richiesta' }),
+  longitudine: z.string().min(1, { message: 'La Posizione è richiesta' }),
+  stato: z.string().min(1, { message: 'Lo Stato è richiesto' }),
 });
 
 const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
@@ -198,7 +198,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   {/* Aggiunto margin-top per separare dall'input */}
                   <input
                     type="text"
-                    placeholder="Describe eventual problems (i.e. broken branch, sick, ...)"
+                    placeholder="Descrivere i problemi (rami rotti, malato, ...)"
                     className="w-full border border-black outline-none p-2"
                     onChange={(e) =>
                       handleChange('stato', e.currentTarget.value)
