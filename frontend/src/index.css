@@ -9,6 +9,10 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.leaflet-container {
+  height: 100vh;
+}
+
 .leaflet-control-container {
   display: none;
 }

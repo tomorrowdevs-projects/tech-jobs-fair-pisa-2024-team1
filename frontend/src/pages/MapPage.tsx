@@ -10,8 +10,8 @@ import { useReports } from '../hooks/useReports';
 import TreeCard from '../components/TreeCard';
 import { Report } from '../types';
 import RoutingMachine from '../components/RoutingMachine';
-import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import 'leaflet/dist/leaflet.css';
 
 export interface Place {
   display_name?: string;
@@ -130,7 +130,7 @@ const MapPage = () => {
         </button>
       </div>
 
-      <div className="absolute top-1/2 right-4 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
+      <div className="absolute top-1/3 right-4 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
         <button
           onClick={() =>
             setLocation(
