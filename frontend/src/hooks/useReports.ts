@@ -41,6 +41,7 @@ export const useReports = () => {
       setLoading(true);
       const { data } = await updateReport(report);
       setLoading(false);
+      findReports();
       return data;
     } catch (err) {
       setLoading(false);

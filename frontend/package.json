@@ -26,7 +26,8 @@
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.26.2",
     "recharts": "^2.12.7",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "@vercel/blob": "^0.25.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

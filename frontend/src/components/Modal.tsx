@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import SearchInput from './Search';
 import { TbLocationFilled } from 'react-icons/tb';
 import { useUserLocation } from '../hooks/useUserLocation';
@@ -6,6 +6,8 @@ import { Report } from '../types';
 import { useReports } from '../hooks/useReports';
 import { z, ZodError } from 'zod';
 import { AxiosError } from 'axios';
+import { upload } from '@vercel/blob/client';
+import { FiX } from 'react-icons/fi';
 
 interface ModalProps {
   isOpen: boolean;
@@ -39,6 +41,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   const [isSick, setIsSick] = useState<boolean | null>(null);
   const [isCurrentLocation, setIsCurrentLocation] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (selectedTree) {
@@ -67,15 +70,38 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     } as Report);
   };
 
-  const handleSubmit = () => {
+  const setReportImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (!inputFileRef.current?.files) {
+      throw new Error('No file selected');
+    }
+
+    const file = inputFileRef.current.files[0];
+
+    const newBlob = await upload(file.name, file, {
+      access: 'public',
+      handleUploadUrl: '/api/upload',
+    });
+
+    const newReport = report ? { ...report } : {};
+    setReport({ ...newReport, immagine: newBlob?.url ?? "" } as Report)
+  }
+
+  const removeReportImage = () => {
+    const newReport = report ? { ...report } : {};
+    setReport({ ...newReport, immagine: '' } as Report);
+  }
+
+  const handleSubmit = async () => {
     try {
       ReportSchema.parse(report);
-      const todayDate = new Date().toISOString().split('T')[0];
-      const newData = { ...report, ultima_segnalazione: todayDate } as Report;
+      const ultima_segnalazione = new Date().toISOString().split('T')[0];
+      const newData = { ...report, ultima_segnalazione } as Report;
       if (selectedTree) {
-        editReport(newData);
+        await editReport(newData);
       } else {
-        addReport(newData);
+        await addReport(newData);
       }
       setIsOpen(false);
       setReport(initialState);
@@ -119,8 +145,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
               <select
                 className="border border-black outline-none rounded-none bg-white h-[42px]"
                 onChange={(e) => handleChange('tipo', e.currentTarget.value)}
-                defaultValue={report?.tipo}
-                value={report?.tipo}
+                value={report?.tipo ?? ""}
               >
                 <option value="" disabled>
                   Seleziona un tipo...
@@ -215,11 +240,20 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
             </div>
             <div className="flex flex-col justify-center gap-1 h-full">
               <span className="font-semibold">Immagine</span>
-              <div className="border-2 border-dashed border-gray-400 bg-gray-100 w-full h-full flex justify-center items-center">
-                <p className="text-center text-gray-400">
-                  Aggiungi un immagine <br />
-                  (Facoltativo)
-                </p>
+              <div className={`relative border-2 ${report?.immagine ? 'border-black hover:opacity-20' : ' border-dashed border-gray-400 bg-gray-100'} w-full h-full flex justify-center items-center cursor-pointer`} onClick={() => inputFileRef.current?.click()}>
+                {report?.immagine ?
+                  <img src='https://i0.wp.com/www.naturalmeteo.it/wp-content/uploads/2022/10/Salix-alba-scaled.jpg?fit=1200%2C1041&ssl=1' /> :
+                  <p className="text-center text-gray-400">
+                    Aggiungi un immagine <br />
+                    (Facoltativo)
+                  </p>
+                }
+                {!report?.immagine &&
+                  <button className='text-white absolute top-0 right-0 bg-[#CE6146] rounded-md p-2 m-2 box-shadow' onClick={removeReportImage}>
+                    <FiX size={20} />
+                  </button>
+                }
+                <input name="file" ref={inputFileRef} type="file" className='hidden' onChange={(e) => setReportImage(e)} />
               </div>
             </div>
             {error && <p className="font-semibold text-red-500">{error}</p>}
