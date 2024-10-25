@@ -28,17 +28,20 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     latitudine: '',
     longitudine: '',
     stato: '',
-    ultima_segnalazione: ''
+    ultima_segnalazione: '',
+    immagine: '',
   });
   const { position } = useUserLocation();
   const { addReport, loading, editReport } = useReports();
   const [error, setError] = useState<string>();
   const [isSick, setIsSick] = useState<boolean | null>(null);
   const [isCurrentLocation, setIsCurrentLocation] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedTree) {
       setReport(selectedTree);
+      setIsEdit(true);
       setIsSick(selectedTree?.stato !== 'Buono');
     }
   }, [selectedTree]);
@@ -81,6 +84,8 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     }
   };
 
+  console.log(report);
+
   return (
     <div
       id="slideover-container"
@@ -108,6 +113,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 className="border border-black outline-none p-2"
                 onChange={(e) => handleChange('tipo', e.currentTarget.value)}
                 defaultValue={report?.tipo}
+                value={report?.tipo}
               >
                 <option value="" disabled>
                   Seleziona un tipo...
@@ -127,7 +133,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 value={report?.nome}
               />
             </div>
-            {selectedTree && (
+            {!isEdit && (
               <div className="flex flex-col justify-center gap-1">
                 <span className="font-semibold">Posizione</span>
                 <div className="relative">
@@ -165,10 +171,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     handleChange('stato', 'Buono');
                     setIsSick(false);
                   }}
-                  className={`px-4 py-2 border ${isSick === false
+                  className={`px-4 py-2 border ${
+                    isSick === false
                       ? 'bg-[#334D42] text-[#EFE9CE]'
                       : 'bg-white text-black border-black'
-                    } w-full font-semibold`}
+                  } w-full font-semibold`}
                 >
                   Buono
                 </button>
@@ -176,10 +183,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   onClick={() => {
                     setIsSick(true);
                   }}
-                  className={`px-4 py-2 border ${isSick
+                  className={`px-4 py-2 border ${
+                    isSick
                       ? 'bg-[#CE6146] text-[#EFE9CE]'
                       : 'bg-white text-black border-black'
-                    } w-full font-semibold `}
+                  } w-full font-semibold `}
                 >
                   Malato
                 </button>

@@ -31,10 +31,10 @@ const TreeCard = ({
     return isNaN(date.getTime())
       ? 'N/A'
       : date.toLocaleDateString('it-IT', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        });
   }, [selectedTree?.ultima_segnalazione]);
 
   return (

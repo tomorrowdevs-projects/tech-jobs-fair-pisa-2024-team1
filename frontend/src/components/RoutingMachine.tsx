@@ -21,15 +21,15 @@ const RoutingMachine = ({ start, end }: RoutingMachineProps) => {
         [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
         {
           createMarker: () => {
-            return false
-          }
+            return false;
+          },
         }
       ),
       addWaypoints: false,
       lineOptions: {
         styles: [{ color: '#3b82f6', weight: 3 }],
         extendToWaypoints: false,
-        missingRouteTolerance: 0
+        missingRouteTolerance: 0,
       },
     }).addTo(map);
 
