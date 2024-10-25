@@ -21,16 +21,18 @@ const ReportSchema = z.object({
   stato: z.string().min(1, { message: 'Status is required' }),
 });
 
+const initialState = {
+  tipo: '',
+  nome: '',
+  latitudine: '',
+  longitudine: '',
+  stato: '',
+  ultima_segnalazione: '',
+  immagine: '',
+};
+
 const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
-  const [report, setReport] = useState<Report | null>({
-    tipo: '',
-    nome: '',
-    latitudine: '',
-    longitudine: '',
-    stato: '',
-    ultima_segnalazione: '',
-    immagine: '',
-  });
+  const [report, setReport] = useState<Report | null>(initialState);
   const { position } = useUserLocation();
   const { addReport, loading, editReport } = useReports();
   const [error, setError] = useState<string>();
@@ -70,9 +72,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       } else {
         addReport(newData);
       }
-      setReport(null);
-      setError('');
       setIsOpen(false);
+      setReport(initialState);
+      setError('');
+      setIsSick(null);
+      setIsEdit(false);
     } catch (err) {
       if (err instanceof ZodError) {
         setError(err.errors[0].message);
@@ -83,8 +87,6 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       }
     }
   };
-
-  console.log(report);
 
   return (
     <div
