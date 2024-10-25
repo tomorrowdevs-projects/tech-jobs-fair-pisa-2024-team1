@@ -74,88 +74,93 @@ const MapPage = () => {
   }, []);
 
   return (
-    <div className="h-screen relative flex items-center max-w-md">
-      <MapContainer
-        center={currentLocation}
-        zoom={13}
-        zoomControl={false}
-        className="w-full h-screen"
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {position && <Marker position={position} icon={userMarker()} />}
-        <FlyToUserLocation position={currentLocation} />
+    <div className="w-full flex justify-center items-center">
+      <div className="h-screen relative flex items-center w-full max-w-md">
+        <MapContainer
+          center={currentLocation}
+          zoom={13}
+          zoomControl={false}
+          className="w-full h-screen"
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {position && <Marker position={position} icon={userMarker()} />}
+          <FlyToUserLocation position={currentLocation} />
 
-        {position && selectedTree && isNavigate && (
-          <RoutingMachine
-            start={position}
-            end={[
-              Number(selectedTree.latitudine),
-              Number(selectedTree.longitudine),
-            ]}
+          {position && selectedTree && isNavigate && (
+            <RoutingMachine
+              start={position}
+              end={[
+                Number(selectedTree.latitudine),
+                Number(selectedTree.longitudine),
+              ]}
+            />
+          )}
+
+          {allReports.map((report) => {
+            const isBadCondition = report.stato !== 'Buono';
+            return (
+              <Marker
+                key={report.id}
+                position={[
+                  Number(report.latitudine),
+                  Number(report.longitudine),
+                ]}
+                icon={treeMarker(isBadCondition)}
+                eventHandlers={{
+                  click: () => {
+                    setSelectedTree(report);
+                    setIsNavigate(false);
+                  },
+                }}
+              />
+            );
+          })}
+        </MapContainer>
+
+        <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[400]">
+          <SearchInput
+            setLocation={setLocation}
+            includeIcon
+            className="w-full rounded-full p-4 box-shadow placeholder:italic font-medium outline-none"
+          />
+        </div>
+
+        <div className="w-full fixed bottom-0 left-0 z-[400] flex justify-center items-center">
+          <button onClick={() => setIsOpen(true)}>
+            <Logo />
+          </button>
+        </div>
+
+        <div className="absolute top-1/3 right-4 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
+          <button
+            onClick={() =>
+              setLocation(
+                position ? { lat: position[0], lon: position[1] } : null
+              )
+            }
+          >
+            <MdOutlineMyLocation size={30} />
+          </button>
+        </div>
+
+        <Modal
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          selectedTree={selectedTree}
+        />
+
+        {selectedTree && (
+          <TreeCard
+            selectedTree={selectedTree}
+            onClose={handleCloseModal}
+            onNavigate={handleNavigate}
+            onOpenModal={handleOpenModal}
           />
         )}
-
-        {allReports.map((report) => {
-          const isBadCondition = report.stato !== 'Buono';
-          return (
-            <Marker
-              key={report.id}
-              position={[Number(report.latitudine), Number(report.longitudine)]}
-              icon={treeMarker(isBadCondition)}
-              eventHandlers={{
-                click: () => {
-                  setSelectedTree(report);
-                  setIsNavigate(false);
-                },
-              }}
-            />
-          );
-        })}
-      </MapContainer>
-
-      <div className="absolute top-0 left-0 flex justify-center items-center p-4 w-full z-[400]">
-        <SearchInput
-          setLocation={setLocation}
-          includeIcon
-          className="w-full rounded-full p-4 box-shadow placeholder:italic font-medium outline-none"
-        />
       </div>
-
-      <div className="w-full fixed bottom-0 left-0 z-[400] flex justify-center items-center">
-        <button onClick={() => setIsOpen(true)}>
-          <Logo />
-        </button>
-      </div>
-
-      <div className="absolute top-1/3 right-4 bg-white box-shadow p-2 rounded-md z-[400] flex justify-center items-center">
-        <button
-          onClick={() =>
-            setLocation(
-              position ? { lat: position[0], lon: position[1] } : null
-            )
-          }
-        >
-          <MdOutlineMyLocation size={30} />
-        </button>
-      </div>
-
-      <Modal
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-        selectedTree={selectedTree}
-      />
-
-      {selectedTree && (
-        <TreeCard
-          selectedTree={selectedTree}
-          onClose={handleCloseModal}
-          onNavigate={handleNavigate}
-          onOpenModal={handleOpenModal}
-        />
-      )}
     </div>
   );
 };

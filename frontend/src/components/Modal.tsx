@@ -103,7 +103,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       />
       <div
         id="slideover"
-        className={`w-full rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${isOpen ? 'top-20' : 'top-full'}`}
+        className={`w-full max-w-md rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${isOpen ? 'top-20' : 'top-full'}`}
       >
         <div className="w-full h-[90%] flex flex-col justify-start items-center">
           <div className="w-1/2 bg-gray-200 rounded-full h-[7px]" />
@@ -112,7 +112,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
             <div className="flex flex-col justify-center gap-1">
               <span className="font-semibold">Tipo</span>
               <select
-                className="border border-black outline-none p-2"
+                className="border border-black outline-none rounded-none bg-white h-[42px]"
                 onChange={(e) => handleChange('tipo', e.currentTarget.value)}
                 defaultValue={report?.tipo}
                 value={report?.tipo}
@@ -130,7 +130,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
               <input
                 type="text"
                 placeholder="Aggiungi un nome..."
-                className="border border-black outline-none p-2"
+                className="border border-black outline-none p-2 rounded-none"
                 onChange={(e) => handleChange('nome', e.currentTarget.value)}
                 value={report?.nome}
               />
@@ -148,7 +148,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                       setIsCurrentLocation(false);
                     }}
                     isCurrentLocation={isCurrentLocation}
-                    className="border border-black outline-none p-2 w-full"
+                    className="border border-black outline-none p-2 w-full rounded-none"
                   />
                   <button
                     className="absolute top-[3px] right-1 p-2"
@@ -173,11 +173,10 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     handleChange('stato', 'Buono');
                     setIsSick(false);
                   }}
-                  className={`px-4 py-2 border ${
-                    isSick === false
-                      ? 'bg-[#334D42] text-[#EFE9CE]'
-                      : 'bg-white text-black border-black'
-                  } w-full font-semibold`}
+                  className={`px-4 py-2 border ${isSick === false
+                    ? 'bg-[#334D42] text-[#EFE9CE]'
+                    : 'bg-white text-black border-black'
+                    } w-full font-semibold`}
                 >
                   Buono
                 </button>
@@ -185,11 +184,10 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   onClick={() => {
                     setIsSick(true);
                   }}
-                  className={`px-4 py-2 border ${
-                    isSick
-                      ? 'bg-[#CE6146] text-[#EFE9CE]'
-                      : 'bg-white text-black border-black'
-                  } w-full font-semibold `}
+                  className={`px-4 py-2 border ${isSick
+                    ? 'bg-[#CE6146] text-[#EFE9CE]'
+                    : 'bg-white text-black border-black'
+                    } w-full font-semibold `}
                 >
                   Malato
                 </button>
@@ -225,12 +223,12 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
               className={`w-full p-4 ${loading ? 'bg-[#334D42]/75 text-[#EFE9CE]/75' : 'bg-[#334D42] text-[#EFE9CE]'} bg-[#334D42] text-[#EFE9CE] font-semibold text-lg rounded-[4px]`}
               onClick={handleSubmit}
             >
-              Segnala
+              Invio
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

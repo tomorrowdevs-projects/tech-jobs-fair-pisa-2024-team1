@@ -31,65 +31,71 @@ const TreeCard = ({
     return isNaN(date.getTime())
       ? 'N/A'
       : date.toLocaleDateString('it-IT', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-        });
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
   }, [selectedTree?.ultima_segnalazione]);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full p-4 z-[500] flex flex-col justify-center items-end">
-      <button
-        onClick={onClose}
-        className="bg-white rounded-full p-2 shadow-md mb-2"
-      >
-        <IoCloseSharp size={25} color="black" />
-      </button>
-      <div className="flex flex-col justify-center items-center  bg-white w-full p-4 rounded-[20px] box-shadow">
-        <h2 className="text-2xl font-bold text-black mb-2">
-          {selectedTree?.nome}
-        </h2>
-        <div className="flex items-center gap-8 w-full">
-          <img
-            src={selectedTree?.immagine ?? placeholder}
-            alt={selectedTree?.nome}
-            className="object-cover rounded-lg opacity-75 box-shadow w-[150px] h-[200px]"
-          />
+    <div className="fixed bottom-0 left-0 flex justify-center items-center z-[500] w-full">
+      <div className="w-full max-w-md p-4 flex flex-col justify-center items-end">
+        <button
+          onClick={onClose}
+          className="bg-white rounded-full p-2 shadow-md mb-2"
+        >
+          <IoCloseSharp size={25} color="black" />
+        </button>
+        <div className="flex flex-col justify-center items-center  bg-white w-full p-4 pt-2 rounded-[20px] box-shadow">
+          <h2 className="text-2xl font-bold text-black mb-2">
+            {selectedTree?.nome}
+          </h2>
+          <div className="flex items-center gap-6 w-full">
+            <img
+              src={selectedTree?.immagine ?? placeholder}
+              alt={selectedTree?.nome}
+              width={150}
+              height={200}
+              className="object-cover rounded-lg opacity-75 box-shadow w-[150px] h-[200px]"
+            />
 
-          <div className="w-full">
-            <p className="text-[#878585] text-sm font-medium">Tipo</p>
-            <p className="font-semibold text-lg mb-2">{selectedTree?.tipo}</p>
-            <p className="text-[#878585] font-medium text-sm">Condizione</p>
-            <p className="font-semibold text-lg mb-2">{selectedTree?.stato}</p>
-            <p className="text-[#878585] font-medium text-sm">
-              Ultima Segnalazione
-            </p>
-            <p className="font-semibold text-lg mb-2">{lastReportDate}</p>
+            <div className="w-full">
+              <p className="text-[#878585] text-sm font-medium leading-none">Tipo</p>
+              <p className="font-semibold text-lg mb-2">{selectedTree?.tipo}</p>
+              <p className="text-[#878585] font-medium text-sm leading-none">Condizione</p>
+              <p className="font-semibold text-lg mb-2">
+                {selectedTree?.stato}
+              </p>
+              <p className="text-[#878585] font-medium text-sm leading-none">
+                Ultima Segnalazione
+              </p>
+              <p className="font-semibold text-lg mb-2">{lastReportDate}</p>
 
-            <div className="flex justify-center gap-3 items-center mt-2 w-full">
-              {isTreeHealthy ? (
-                <button
-                  onClick={onNavigate}
-                  className="bg-[#334D42] text-[#EFE9CE] py-2 px-4 rounded-lg shadow-lg font-medium"
-                >
-                  Percorso
-                </button>
-              ) : (
-                <>
+              <div className="flex justify-center gap-3 items-center mt-2 w-full">
+                {isTreeHealthy ? (
                   <button
                     onClick={onNavigate}
-                    className="bg-[#334D42] text-[#EFE9CE] p-2 rounded-full shadow-lg"
+                    className="bg-[#334D42] text-[#EFE9CE] py-2 px-4 rounded-lg shadow-lg font-medium"
                   >
-                    <IoNavigateCircleOutline size={30} />
+                    Percorso
                   </button>
-                  <button
-                    className="bg-[#CE6146] text-[#EFE9CE] p-2 rounded-full shadow-lg"
-                    onClick={onOpenModal}
-                  >
-                    <RiToolsFill size={30} />
-                  </button>
-                </>
-              )}
+                ) : (
+                  <>
+                    <button
+                      onClick={onNavigate}
+                      className="bg-[#334D42] text-[#EFE9CE] p-2 rounded-full shadow-lg"
+                    >
+                      <IoNavigateCircleOutline size={30} />
+                    </button>
+                    <button
+                      className="bg-[#CE6146] text-[#EFE9CE] p-2 rounded-full shadow-lg"
+                      onClick={onOpenModal}
+                    >
+                      <RiToolsFill size={30} />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
