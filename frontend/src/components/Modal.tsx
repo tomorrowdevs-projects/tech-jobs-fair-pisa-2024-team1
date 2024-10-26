@@ -122,7 +122,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   return (
     <div
       id="slideover-container"
-      className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? '' : 'invisible'} z-[500]`}
+      className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? '' : 'invisible'} z-[500] overflow-scroll`}
     >
       <div
         onClick={() => {
@@ -203,11 +203,10 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     handleChange('stato', 'Buono');
                     setIsSick(false);
                   }}
-                  className={`px-4 py-2 border ${
-                    isSick === false
+                  className={`px-4 py-2 border ${isSick === false
                       ? 'bg-[#334D42] text-[#EFE9CE]'
                       : 'bg-white text-black border-black'
-                  } w-full font-semibold`}
+                    } w-full font-semibold`}
                 >
                   Buono
                 </button>
@@ -215,11 +214,10 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   onClick={() => {
                     setIsSick(true);
                   }}
-                  className={`px-4 py-2 border ${
-                    isSick
+                  className={`px-4 py-2 border ${isSick
                       ? 'bg-[#CE6146] text-[#EFE9CE]'
                       : 'bg-white text-black border-black'
-                  } w-full font-semibold `}
+                    } w-full font-semibold `}
                 >
                   Malato
                 </button>
