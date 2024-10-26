@@ -31,10 +31,10 @@ const TreeCard = ({
     return isNaN(date.getTime())
       ? 'N/A'
       : date.toLocaleDateString('it-IT', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        });
   }, [selectedTree?.ultima_segnalazione]);
 
   return (
@@ -60,9 +60,13 @@ const TreeCard = ({
             />
 
             <div className="w-full">
-              <p className="text-[#878585] text-sm font-medium leading-none">Tipo</p>
+              <p className="text-[#878585] text-sm font-medium leading-none">
+                Tipo
+              </p>
               <p className="font-semibold text-lg mb-2">{selectedTree?.tipo}</p>
-              <p className="text-[#878585] font-medium text-sm leading-none">Condizione</p>
+              <p className="text-[#878585] font-medium text-sm leading-none">
+                Condizione
+              </p>
               <p className="font-semibold text-lg mb-2">
                 {selectedTree?.stato}
               </p>

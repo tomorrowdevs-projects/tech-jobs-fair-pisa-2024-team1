@@ -49,7 +49,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     if (!isOpen && !selectedTree) {
       setReport(initialState);
       setIsEdit(false);
-      setIsSick(null)
+      setIsSick(null);
     }
   }, [selectedTree, isOpen]);
 
@@ -178,21 +178,24 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     handleChange('stato', 'Buono');
                     setIsSick(false);
                   }}
-                  className={`px-4 py-2 border ${isSick === false
-                    ? 'bg-[#334D42] text-[#EFE9CE]'
-                    : 'bg-white text-black border-black'
-                    } w-full font-semibold`}
+                  className={`px-4 py-2 border ${
+                    isSick === false
+                      ? 'bg-[#334D42] text-[#EFE9CE]'
+                      : 'bg-white text-black border-black'
+                  } w-full font-semibold`}
                 >
                   Buono
                 </button>
                 <button
                   onClick={() => {
+                    handleChange('stato', 'Buono');
                     setIsSick(true);
                   }}
-                  className={`px-4 py-2 border ${isSick
-                    ? 'bg-[#CE6146] text-[#EFE9CE]'
-                    : 'bg-white text-black border-black'
-                    } w-full font-semibold `}
+                  className={`px-4 py-2 border ${
+                    isSick
+                      ? 'bg-[#CE6146] text-[#EFE9CE]'
+                      : 'bg-white text-black border-black'
+                  } w-full font-semibold `}
                 >
                   Malato
                 </button>
@@ -233,7 +236,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
