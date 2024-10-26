@@ -31,10 +31,10 @@ const TreeCard = ({
     return isNaN(date.getTime())
       ? 'N/A'
       : date.toLocaleDateString('it-IT', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-        });
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
   }, [selectedTree?.ultima_segnalazione]);
 
   return (
@@ -56,7 +56,7 @@ const TreeCard = ({
               alt={selectedTree?.nome}
               width={150}
               height={200}
-              className="object-cover rounded-lg opacity-75 box-shadow w-[150px] h-[200px]"
+              className="object-cover rounded-lg box-shadow w-[150px] h-[200px]"
             />
 
             <div className="w-full">
