@@ -248,7 +248,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     (Facoltativo)
                   </p>
                 }
-                {!report?.immagine &&
+                {report?.immagine &&
                   <button className='text-white absolute top-0 right-0 bg-[#CE6146] rounded-md p-2 m-2 box-shadow' onClick={removeReportImage}>
                     <FiX size={20} />
                   </button>
