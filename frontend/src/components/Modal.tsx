@@ -175,7 +175,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 {/* Modificato qui per allineare i pulsanti */}
                 <button
                   onClick={() => {
-                    handleChange('stato', 'Buono');
+                    handleChange('stato', '');
                     setIsSick(false);
                   }}
                   className={`px-4 py-2 border ${
@@ -188,7 +188,6 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 </button>
                 <button
                   onClick={() => {
-                    handleChange('stato', 'Buono');
                     setIsSick(true);
                   }}
                   className={`px-4 py-2 border ${
