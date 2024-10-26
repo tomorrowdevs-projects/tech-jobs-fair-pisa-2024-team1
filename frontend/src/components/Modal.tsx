@@ -52,7 +52,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     if (!isOpen && !selectedTree) {
       setReport(initialState);
       setIsEdit(false);
-      setIsSick(null)
+      setIsSick(null);
     }
   }, [selectedTree, isOpen]);
 
@@ -85,13 +85,13 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     });
 
     const newReport = report ? { ...report } : {};
-    setReport({ ...newReport, immagine: newBlob?.url ?? "" } as Report)
-  }
+    setReport({ ...newReport, immagine: newBlob?.url ?? '' } as Report);
+  };
 
   const removeReportImage = () => {
     const newReport = report ? { ...report } : {};
     setReport({ ...newReport, immagine: '' } as Report);
-  }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -145,7 +145,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
               <select
                 className="border border-black outline-none rounded-none bg-white h-[42px]"
                 onChange={(e) => handleChange('tipo', e.currentTarget.value)}
-                value={report?.tipo ?? ""}
+                value={report?.tipo ?? ''}
               >
                 <option value="" disabled>
                   Seleziona un tipo...
@@ -203,10 +203,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     handleChange('stato', 'Buono');
                     setIsSick(false);
                   }}
-                  className={`px-4 py-2 border ${isSick === false
-                    ? 'bg-[#334D42] text-[#EFE9CE]'
-                    : 'bg-white text-black border-black'
-                    } w-full font-semibold`}
+                  className={`px-4 py-2 border ${
+                    isSick === false
+                      ? 'bg-[#334D42] text-[#EFE9CE]'
+                      : 'bg-white text-black border-black'
+                  } w-full font-semibold`}
                 >
                   Buono
                 </button>
@@ -214,10 +215,11 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                   onClick={() => {
                     setIsSick(true);
                   }}
-                  className={`px-4 py-2 border ${isSick
-                    ? 'bg-[#CE6146] text-[#EFE9CE]'
-                    : 'bg-white text-black border-black'
-                    } w-full font-semibold `}
+                  className={`px-4 py-2 border ${
+                    isSick
+                      ? 'bg-[#CE6146] text-[#EFE9CE]'
+                      : 'bg-white text-black border-black'
+                  } w-full font-semibold `}
                 >
                   Malato
                 </button>
@@ -240,20 +242,33 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
             </div>
             <div className="flex flex-col justify-center gap-1 h-full">
               <span className="font-semibold">Immagine</span>
-              <div className={`relative border-2 ${report?.immagine ? 'border-black hover:opacity-20' : ' border-dashed border-gray-400 bg-gray-100'} w-full h-full flex justify-center items-center cursor-pointer`} onClick={() => inputFileRef.current?.click()}>
-                {report?.immagine ?
-                  <img src='https://i0.wp.com/www.naturalmeteo.it/wp-content/uploads/2022/10/Salix-alba-scaled.jpg?fit=1200%2C1041&ssl=1' /> :
+              <div
+                className={`relative border-2 ${report?.immagine ? 'border-black hover:opacity-20' : ' border-dashed border-gray-400 bg-gray-100'} w-full h-full flex justify-center items-center cursor-pointer`}
+                onClick={() => inputFileRef.current?.click()}
+              >
+                {report?.immagine ? (
+                  <img src="https://i0.wp.com/www.naturalmeteo.it/wp-content/uploads/2022/10/Salix-alba-scaled.jpg?fit=1200%2C1041&ssl=1" />
+                ) : (
                   <p className="text-center text-gray-400">
                     Aggiungi un immagine <br />
                     (Facoltativo)
                   </p>
-                }
-                {report?.immagine &&
-                  <button className='text-white absolute top-0 right-0 bg-[#CE6146] rounded-md p-2 m-2 box-shadow' onClick={removeReportImage}>
+                )}
+                {report?.immagine && (
+                  <button
+                    className="text-white absolute top-0 right-0 bg-[#CE6146] rounded-md p-2 m-2 box-shadow"
+                    onClick={removeReportImage}
+                  >
                     <FiX size={20} />
                   </button>
-                }
-                <input name="file" ref={inputFileRef} type="file" className='hidden' onChange={(e) => setReportImage(e)} />
+                )}
+                <input
+                  name="file"
+                  ref={inputFileRef}
+                  type="file"
+                  className="hidden"
+                  onChange={(e) => setReportImage(e)}
+                />
               </div>
             </div>
             {error && <p className="font-semibold text-red-500">{error}</p>}
@@ -267,7 +282,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

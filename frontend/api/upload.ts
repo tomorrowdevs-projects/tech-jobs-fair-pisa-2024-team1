@@ -1,4 +1,4 @@
-import { handleUpload } from "@vercel/blob/client";
+import { handleUpload } from '@vercel/blob/client';
 
 export default async function POST(req, res) {
   const body = req.body;
@@ -13,7 +13,7 @@ export default async function POST(req, res) {
         // Otherwise, you're allowing anonymous uploads.
 
         return {
-          allowedContentTypes: ["image/jpeg", "image/png", "image/gif"],
+          allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif'],
           tokenPayload: JSON.stringify({
             // optional, sent to your server on upload completion
             // you could pass a user id from auth, or a value from clientPayload
@@ -22,14 +22,14 @@ export default async function POST(req, res) {
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {
         // Get notified of client upload completion
-        console.log("blob upload completed", blob, tokenPayload);
+        console.log('blob upload completed', blob, tokenPayload);
 
         try {
           // Run any logic after the file upload completed
           // const { userId } = JSON.parse(tokenPayload);
           // await db.update({ avatar: blob.url, userId });
         } catch (error) {
-          throw new Error("Could not update user", error);
+          throw new Error('Could not update user', error);
         }
       },
     });
