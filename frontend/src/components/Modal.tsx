@@ -122,7 +122,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
   return (
     <div
       id="slideover-container"
-      className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? '' : 'invisible'} z-[500] overflow-scroll`}
+      className={`w-full h-full fixed inset-0 flex justify-center items-center ${isOpen ? '' : 'invisible'} z-[500]`}
     >
       <div
         onClick={() => {
@@ -136,7 +136,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
         id="slideover"
         className={`w-full max-w-md rounded-t-[50px] bg-white h-full absolute duration-300 ease-out transition-all p-4 ${isOpen ? 'top-20' : 'top-full'}`}
       >
-        <div className="w-full h-[90%] flex flex-col justify-start items-center">
+        <div className="w-full h-[90%] flex flex-col justify-start items-center overflow-scroll">
           <div className="w-1/2 bg-gray-200 rounded-full h-[7px]" />
           <p className="font-semibold text-xl mt-2">Segnalazione</p>
           <div className="flex flex-col w-full h-full p-2 gap-4">
@@ -204,8 +204,8 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     setIsSick(false);
                   }}
                   className={`px-4 py-2 border ${isSick === false
-                      ? 'bg-[#334D42] text-[#EFE9CE]'
-                      : 'bg-white text-black border-black'
+                    ? 'bg-[#334D42] text-[#EFE9CE]'
+                    : 'bg-white text-black border-black'
                     } w-full font-semibold`}
                 >
                   Buono
@@ -215,8 +215,8 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                     setIsSick(true);
                   }}
                   className={`px-4 py-2 border ${isSick
-                      ? 'bg-[#CE6146] text-[#EFE9CE]'
-                      : 'bg-white text-black border-black'
+                    ? 'bg-[#CE6146] text-[#EFE9CE]'
+                    : 'bg-white text-black border-black'
                     } w-full font-semibold `}
                 >
                   Malato
