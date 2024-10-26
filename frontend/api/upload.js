@@ -7,7 +7,7 @@ export default async function POST(req, res) {
     const jsonResponse = await handleUpload({
       body,
       request: req,
-      onBeforeGenerateToken: async () => {
+      onBeforeGenerateToken: async (pathname) => {
         // Generate a client token for the browser to upload the file
         // ⚠️ Authenticate and authorize users before generating the token.
         // Otherwise, you're allowing anonymous uploads.
@@ -29,7 +29,7 @@ export default async function POST(req, res) {
           // const { userId } = JSON.parse(tokenPayload);
           // await db.update({ avatar: blob.url, userId });
         } catch (error) {
-          throw new Error('Could not update user', error);
+          throw new Error('Could not update user');
         }
       },
     });
