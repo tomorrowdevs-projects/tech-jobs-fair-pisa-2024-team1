@@ -88,14 +88,6 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
     setReport({ ...newReport, immagine: newBlob?.url ?? '' } as Report);
   };
 
-  const handleResetImage = () => {
-    if (inputFileRef.current) {
-      inputFileRef.current.value = "";
-      inputFileRef.current.type = "text";
-      inputFileRef.current.type = "file";
-    }
-  };
-
   const removeReportImage = () => {
     const newReport = report ? { ...report } : {};
     setReport({ ...newReport, immagine: '' } as Report);
@@ -114,7 +106,6 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
       setIsOpen(false);
       setReport(initialState);
       setError('');
-      handleResetImage()
       setIsSick(null);
       setIsEdit(false);
     } catch (err) {
