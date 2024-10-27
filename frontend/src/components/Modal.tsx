@@ -254,7 +254,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 onClick={() => inputFileRef.current?.click()}
               >
                 {report?.immagine ? (
-                  <img src={report?.immagine} className='object-cover' />
+                  <img src={report.immagine} className='object-cover' />
                 ) : (
                   <p className="text-center text-gray-400">
                     Aggiungi un immagine <br />
