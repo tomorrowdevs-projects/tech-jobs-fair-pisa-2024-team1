@@ -34,6 +34,8 @@ export default async function POST(req, res) {
       },
     });
 
+    console.log(jsonResponse);
+
     res.json(jsonResponse);
   } catch (error) {
     res.status(400).json({ error: error.message });
