@@ -254,7 +254,7 @@ const Modal = ({ isOpen, setIsOpen, selectedTree }: ModalProps) => {
                 onClick={() => inputFileRef.current?.click()}
               >
                 {report?.immagine ? (
-                  <img src="https://i0.wp.com/www.naturalmeteo.it/wp-content/uploads/2022/10/Salix-alba-scaled.jpg?fit=1200%2C1041&ssl=1" />
+                  <img src={report?.immagine} className='object-cover' />
                 ) : (
                   <p className="text-center text-gray-400">
                     Aggiungi un immagine <br />
